@@ -4,7 +4,16 @@ const mongoose = require("mongoose");
 const xss = require("xss-clean");
 const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
+require("dotenv").config();
 const routes = require("./routes");
+
+//mongodb
+const mongoUri = `mongodb+srv://${process.env.DB_ADMIN}:${process.env.DB_PASS}@${process.env.DB_HOST}?retryWrites=true&w=majority`;
+mongoose.connect(mongoUri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
 
 ///body parser
 app.use(express.json());
