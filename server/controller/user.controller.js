@@ -1,3 +1,4 @@
+const httpStatus = require("http-status");
 const { userService } = require("../services");
 
 const userController = {
@@ -12,12 +13,17 @@ const userController = {
         lastname,
         businessname
       );
+      const token = await userService.genAuthToken(user);
 
-      res.status(200).send({
+      ///send register email
+
+      res.cookie("x-access-token", token).status(httpStatus.CREATED).send({
         user,
+        token,
       });
     } catch (error) {
       console.log(error);
+      next(error);
     }
   },
   async signin(req, res, next) {
