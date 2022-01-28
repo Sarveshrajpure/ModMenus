@@ -1,19 +1,22 @@
-const httpStatus = require("http-status");
 const { userService } = require("../services");
+const Joi = require("@hapi/joi");
+const { registerSchema } = require("../helpers/userValidations");
 
 const userController = {
   async register(req, res, next) {
     try {
-      const { email, password, firstname, lastname, businessname } = req.body;
+      let value = await registerSchema.validateAsync(req.body);
 
-      const user = await userService.createUser(
+      let { email, password, firstname, lastname, businessname } = req.body;
+
+      let user = await userService.createUser(
         email,
         password,
         firstname,
         lastname,
         businessname
       );
-      const token = await userService.genAuthToken(user);
+      let token = await userService.genAuthToken(user);
 
       ///send register email
 
