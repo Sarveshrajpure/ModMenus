@@ -29,7 +29,13 @@ const userSchema = mongoose.Schema({
   },
   lastname: { type: String, required: true, maxLength: 100, trim: true },
 
-  businessname: { type: String, required: true, maxLength: 100, trim: true },
+  businessname: {
+    type: String,
+    required: true,
+    maxLength: 100,
+    trim: true,
+    unique: true,
+  },
   verified: {
     type: Boolean,
     default: false,
