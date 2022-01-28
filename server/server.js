@@ -7,7 +7,7 @@ const cors = require("cors");
 require("dotenv").config();
 const routes = require("./routes");
 
-const { handleError } = require("./middleware/apiError");
+const { handleError, convertToApiError } = require("./middleware/apiError");
 
 //mongodb
 const mongoUri = `mongodb+srv://${process.env.DB_ADMIN}:${process.env.DB_PASS}@${process.env.DB_HOST}?retryWrites=true&w=majority`;
@@ -30,6 +30,7 @@ app.use(cors());
 app.use("/api", routes);
 
 ///ApiERROR handling
+app.use(convertToApiError);
 app.use((err, req, res, next) => {
   handleError(err, res);
 });
