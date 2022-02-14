@@ -1,8 +1,14 @@
 import React from "react";
 import mm_logo from "../../assests/mm_logo.svg";
+import { useNavigate } from "react-router-dom";
 import "./Nav.css";
 
 const Nav = () => {
+  const navigate = useNavigate();
+
+  const navigateTo = async () => {
+    navigate("/login");
+  };
   return (
     <div className="navWrapper">
       <div className="navBlock px-2 py-2 flex justify-between ">
@@ -13,9 +19,16 @@ const Nav = () => {
             alt="logo"
           />
         </div>
-        <button className=" loginBtn btn btn-primary shadow-none self-center rounded-md text-2xl px-3 py-1 font-semibold  ">
+
+        <div
+          className="goToLoginBtn   mt-2  
+         text-lg   md:text-xl md:mt-4  lg:text-xl md:mt-8"
+          onClick={() => {
+            navigateTo();
+          }}
+        >
           Login
-        </button>
+        </div>
       </div>
     </div>
   );

@@ -1,11 +1,28 @@
 import React from "react";
+import mm_logo from "../assests/mm_logo.svg";
+import { useNavigate } from "react-router-dom";
 import "./register.css";
 
 const Register = () => {
+  const navigate = useNavigate();
+
+  const navigateTo = async () => {
+    navigate("/login");
+  };
   return (
     <div className="registerWrapper ">
       <div className="registerFormBlock w-full lg:max-w-lg  max-w-sm">
-        <form className="registerForm bg-white shadow-md rounded px-12 pt-8 pb-8 mb-4">
+        <form className="registerForm bg-white shadow-md rounded px-14 pt-5 pb-8 mb-4">
+          <img
+            className="logoImg w-1/3 md:w-1/4
+            lg:w-1/4
+            pt-2
+            pb-6
+            "
+            src={mm_logo}
+            alt="logo"
+          />
+
           <div className="mb-4 lg:flex lg:space-x-4">
             <div className="mb-4 ">
               <label
@@ -101,10 +118,20 @@ const Register = () => {
             Register
           </div>
 
-          <div></div>
+          <div className="goToLoginLinkBlock text-center  mt-4 text-sm ">
+            <div>Already registered? </div>
+            <div
+              className="goToLoginLink"
+              onClick={() => {
+                navigateTo();
+              }}
+            >
+              Login
+            </div>
+          </div>
         </form>
         <p class="text-center text-gray-500 text-xs mt-4">
-          &copy;2021 MOD MENUS Corp. <br></br> All rights reserved.
+          &copy;2021 MOD MENUS Corp. All rights reserved.
         </p>
       </div>
     </div>

@@ -1,3 +1,7 @@
+.logoImg {
+  margin: auto;
+}
+
 .registerWrapper {
   /* Center vertically */
   display: flex;
@@ -24,4 +28,21 @@
 .registerBtn:hover {
   background-color: #004466;
   color: #ffff;
+}
+
+.goToLoginLinkBlock {
+  display: flex;
+  justify-content: center;
+}
+
+.goToLoginLink {
+  color: #004466;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+  width: 12%;
+}
+
+.goToLoginLink:hover {
+  font-size: medium;
 }
