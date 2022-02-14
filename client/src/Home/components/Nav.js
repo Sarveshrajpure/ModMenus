@@ -1,23 +1,21 @@
 import React from "react";
-import qr_logo from "../../assests/qr_logo.png";
+import mm_logo from "../../assests/mm_logo.svg";
 import "./Nav.css";
 
 const Nav = () => {
   return (
     <div className="navWrapper">
-      <div className="navBlock px-2 py-2 flex justify-between md:px-20 md:py-6  lg:px-32  lg:py-8">
+      <div className="navBlock px-2 py-2 flex justify-between ">
         <div className=" flex ">
-          <img className="w-16 md:w-22 lg:w-18" src={qr_logo} alt="logo" />
-          <h1
-            className="text-3xl  md:text-4xl  lg:text-4xl
-           font-semibold tracking-wide self-center px-2 text-orange-400   "
-          >
-            Mod Menus
-          </h1>
+          <img
+            className=" w-2/5  md:w-2/3 lg:w-2/3 "
+            src={mm_logo}
+            alt="logo"
+          />
         </div>
-        <div className="loginBtn bg-indigo-600 text-slate-100 self-center text-xl px-3 py-1 rounded-t-xl rounded-b-xl font-semibold ">
+        <button className=" loginBtn btn btn-primary shadow-none self-center rounded-md text-2xl px-3 py-1 font-semibold  ">
           Login
-        </div>
+        </button>
       </div>
     </div>
   );
