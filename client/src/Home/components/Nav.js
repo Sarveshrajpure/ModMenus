@@ -11,7 +11,7 @@ const Nav = () => {
   };
   return (
     <div className="navWrapper">
-      <div className="navBlock px-2 py-2 flex justify-between ">
+      <div className="navBlock px-2 py-2 flex justify-between items-center ">
         <div className=" flex ">
           <img
             className=" w-2/5  md:w-2/3 lg:w-2/3 "
@@ -21,8 +21,8 @@ const Nav = () => {
         </div>
 
         <div
-          className="goToLoginBtn   mt-2  
-         text-lg   md:text-xl md:mt-4  lg:text-xl md:mt-8"
+          className="goToLoginBtn 
+         text-lg   md:text-xl  lg:text-xl "
           onClick={() => {
             navigateTo();
           }}

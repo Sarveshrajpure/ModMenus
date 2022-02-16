@@ -19,7 +19,7 @@ const Hero1 = () => {
       items-center
       "
       >
-        <div className="text-3xl  md:text-4xl  lg:text-5xl">
+        <div className="text-4xl  md:text43xl  lg:text-4xl">
           <p>Create your easy to </p>
 
           <Typical
@@ -31,7 +31,7 @@ const Hero1 = () => {
           <p> mobile menu in less than a minute!</p>
 
           <div
-            className="createMenuBtn    mt-4   text-2xl   md:text-3xl md:mt-6  lg:text-3xl md:mt-10"
+            className="createMenuBtn    mt-6   text-2xl   md:text-2xl md:mt-6  lg:text-2xl md:mt-10"
             onClick={() => {
               navigateTo();
             }}
