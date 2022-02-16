@@ -36,7 +36,28 @@ const genAuthToken = (user) => {
   } catch (error) {}
 };
 
+const findUserByEmail = async (email) => {
+  return User.findOne({ email });
+};
+
+const signInWithEmailAndPassword = async (email, password) => {
+  try {
+    const user = await findUserByEmail(email);
+    if (!user) {
+      throw new ApiError(httpStatus.UNAUTHORIZED, "Sorry Bad Email");
+    }
+    if (!(await user.comparePassword(password))) {
+      throw new ApiError(httpStatus.UNAUTHORIZED, "Sorry Bad Password");
+    }
+
+    return user;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   createUser,
   genAuthToken,
+  signInWithEmailAndPassword,
 };

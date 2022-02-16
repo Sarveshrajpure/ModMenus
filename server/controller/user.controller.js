@@ -1,6 +1,5 @@
 const { userService } = require("../services");
-const Joi = require("@hapi/joi");
-const { registerSchema } = require("../helpers/userValidations");
+const { registerSchema, loginSchema } = require("../helpers/userValidations");
 const { ApiError } = require("../middleware/apiError");
 const httpStatus = require("http-status");
 const { User } = require("../models/user");
@@ -52,10 +51,30 @@ const userController = {
       next(error);
     }
   },
+
   async signin(req, res, next) {
     try {
-    } catch (error) {}
+      //validate user login data using joi schema
+      let value = await loginSchema.validateAsync(req.body);
+      if (value) {
+        const user = await userService.signInWithEmailAndPassword(
+          value.email,
+          value.password
+        );
+        //set access token
+        let token = await userService.genAuthToken(user);
+
+        //set access token to cookies
+        res.cookie("x-access-token", token).status(httpStatus.CREATED).send({
+          user,
+          token,
+        });
+      }
+    } catch (error) {
+      next(error);
+    }
   },
+
   async isauth(req, res, next) {
     try {
     } catch (error) {}
