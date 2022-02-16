@@ -19,7 +19,7 @@ const handleError = (err, res) => {
   });
 };
 
-const convertToApiError = (req, res, err, next) => {
+const convertToApiError = (err, req, res, next) => {
   let error = err;
   if (!(error instanceof ApiError)) {
     const statusCode =

@@ -69,6 +69,11 @@ userSchema.statics.emailTaken = async function (email) {
   return !!user;
 };
 
+userSchema.statics.businessnameTaken = async function (businessname) {
+  const user = await this.findOne({ businessname });
+  return !!user;
+};
+
 const User = mongoose.model("User", userSchema);
 
 module.exports = { User };
