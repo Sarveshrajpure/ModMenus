@@ -4,7 +4,7 @@ const { ApiError } = require("../middlewares/apiError");
 const httpStatus = require("http-status");
 const { User } = require("../models/user");
 
-const userController = {
+const authController = {
   async register(req, res, next) {
     try {
       //validate user register data using joi schema
@@ -80,4 +80,4 @@ const userController = {
   },
 };
 
-module.exports = userController;
+module.exports = authController;
