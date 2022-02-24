@@ -59,7 +59,9 @@ userSchema.methods.generateAuthToken = function () {
 
   const userObj = { sub: user._id.toHexString() };
 
-  const token = jwt.sign(userObj, process.env.DB_SECRET, { expiresIn: "1d" });
+  const token = jwt.sign(userObj, process.env.DB_SECRET, {
+    expiresIn: 86400 * 30,
+  });
 
   return token;
 };

@@ -1,6 +1,6 @@
 const { User } = require("../models/user");
 const httpStatus = require("http-status");
-const { ApiError } = require("../middleware/apiError");
+const { ApiError } = require("../middlewares/apiError");
 
 const createUser = async (
   email,

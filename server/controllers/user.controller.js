@@ -1,6 +1,6 @@
 const { userService } = require("../services");
 const { registerSchema, loginSchema } = require("../helpers/userValidations");
-const { ApiError } = require("../middleware/apiError");
+const { ApiError } = require("../middlewares/apiError");
 const httpStatus = require("http-status");
 const { User } = require("../models/user");
 
@@ -76,8 +76,7 @@ const userController = {
   },
 
   async isauth(req, res, next) {
-    try {
-    } catch (error) {}
+    res.json(req.user);
   },
 };
 

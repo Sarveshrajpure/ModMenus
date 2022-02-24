@@ -6,8 +6,10 @@ const mongoSanitize = require("express-mongo-sanitize");
 const cors = require("cors");
 require("dotenv").config();
 const routes = require("./routes");
+const passport = require("passport");
+const { jwtStrategy } = require("./middlewares/passport");
 
-const { handleError, convertToApiError } = require("./middleware/apiError");
+const { handleError, convertToApiError } = require("./middlewares/apiError");
 
 //mongodb
 const mongoUri = `mongodb+srv://${process.env.DB_ADMIN}:${process.env.DB_PASS}@${process.env.DB_HOST}?retryWrites=true&w=majority`;
@@ -22,6 +24,10 @@ app.use(express.json());
 ///sanitize
 app.use(xss());
 app.use(mongoSanitize());
+
+///passport
+app.use(passport.initialize());
+passport.use("jwt", jwtStrategy);
 
 ///CORS
 app.use(cors());
