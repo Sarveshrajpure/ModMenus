@@ -1,13 +1,15 @@
 const { User } = require("../models/user");
 const httpStatus = require("http-status");
 const { ApiError } = require("../middlewares/apiError");
+const userService = require("./user.service");
 
 const createUser = async (
   email,
   password,
   firstname,
   lastname,
-  businessname
+  businessname,
+  phone
 ) => {
   try {
     if (await User.emailTaken(email)) {
@@ -20,6 +22,7 @@ const createUser = async (
       firstname,
       lastname,
       businessname,
+      phone,
     });
 
     await user.save();
@@ -36,13 +39,9 @@ const genAuthToken = (user) => {
   } catch (error) {}
 };
 
-const findUserByEmail = async (email) => {
-  return User.findOne({ email });
-};
-
 const signInWithEmailAndPassword = async (email, password) => {
   try {
-    const user = await findUserByEmail(email);
+    const user = await userService.findUserByEmail(email);
     if (!user) {
       throw new ApiError(httpStatus.UNAUTHORIZED, "Sorry Bad Email");
     }
