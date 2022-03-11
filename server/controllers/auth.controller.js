@@ -1,8 +1,10 @@
-const { authService } = require("../services");
+const { authService, menuService } = require("../services");
 const { registerSchema, loginSchema } = require("../helpers/userValidations");
 const { ApiError } = require("../middlewares/apiError");
 const httpStatus = require("http-status");
 const { User } = require("../models/user");
+const ShortUniqueId = require("short-unique-id");
+const uid = new ShortUniqueId({ length: 6 });
 
 const authController = {
   async register(req, res, next) {
@@ -40,11 +42,22 @@ const authController = {
         //set access token
         let token = await authService.genAuthToken(user);
 
+        // create default menu for business
+        let menuName = user.businessname + "_menu";
+        let menuReference = uid();
+
+        let createDefaultMenu = await menuService.createMenu(
+          menuName,
+          user.id,
+          menuReference
+        );
+
         ///send register email
 
         //set access token to cookies
         res.cookie("x-access-token", token).status(httpStatus.CREATED).send({
           user,
+          defaultMenu: createDefaultMenu,
           token,
         });
       }
@@ -64,10 +77,13 @@ const authController = {
         );
         //set access token
         let token = await authService.genAuthToken(user);
+        // fetch default menu
+        let menuInfo = await menuService.findDefaultMenu(user.id);
 
         //set access token to cookies
         res.cookie("x-access-token", token).status(httpStatus.CREATED).send({
           user,
+          menuInfo,
           token,
         });
       }

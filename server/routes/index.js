@@ -14,13 +14,9 @@ const routesIndex = [
     route: userRoute,
   },
   {
-    path: "/user",
-    route: userRoute,
+    path: "/menucard",
+    route: menucard,
   },
-  // {
-  //   path: "/menucard",
-  //   route: menucard,
-  // },
 ];
 
 routesIndex.forEach((route) => {
