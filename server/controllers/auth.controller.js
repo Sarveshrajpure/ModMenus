@@ -41,6 +41,7 @@ const authController = {
         let token = await authService.genAuthToken(user);
 
         ///send register email
+        
 
         //set access token to cookies
         res.cookie("x-access-token", token).status(httpStatus.CREATED).send({
