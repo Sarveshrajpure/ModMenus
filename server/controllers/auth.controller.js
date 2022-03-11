@@ -53,6 +53,7 @@ const authController = {
         );
 
         ///send register email
+        
 
         //set access token to cookies
         res.cookie("x-access-token", token).status(httpStatus.CREATED).send({
