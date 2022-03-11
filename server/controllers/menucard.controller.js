@@ -1,5 +1,8 @@
 const menucardController = {
-  async createmenucard(req, res, next) {},
+  async createmenucard(req, res, next) {
+
+    
+  },
   async getmenucard(req, res, next) {},
 };
 
