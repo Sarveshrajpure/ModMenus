@@ -3,7 +3,10 @@ const {
   foodItemService,
   menuService,
 } = require("../services");
-const { categorySchema } = require("../helpers/categoryValidations.js");
+const {
+  categorySchema,
+  updateCategorySchema,
+} = require("../helpers/categoryValidations.js");
 const { foodItemSchema } = require("../helpers/foodItemValidations.js");
 const { ApiError } = require("../middlewares/apiError");
 const httpStatus = require("http-status");
@@ -76,7 +79,35 @@ const menucardController = {
       next(error);
     }
   },
-  
+
+  //Update Apis
+
+  async updateCategory(req, res, next) {
+    try {
+      let value = await updateCategorySchema.validateAsync(req.body);
+
+      let updateCategory = await categoryService.updateCategory(
+        value.name,
+        value.time,
+        value.categoryId
+      );
+
+      if (updateCategory) {
+        res
+          .status(httpStatus.OK)
+          .send({ message: "Category Updated Successfully" });
+      }
+    } catch (error) {
+      next(error);
+    }
+  },
+  async updateFoodItem() {},
+
+  //Delete Apis
+
+  async deleteCategory() {},
+  async deleteFooditem() {},
+  async deleteAllFooditem() {},
 };
 
 module.exports = menucardController;
