@@ -8,6 +8,13 @@ const categorySchema = Joi.object({
   menuId: Joi.objectId(),
 });
 
+const updateCategorySchema = Joi.object({
+  name: Joi.string().min(4).max(255).required("Category name required"),
+  time: Joi.string().min(4).max(225),
+  categoryId: Joi.objectId(),
+});
+
 module.exports = {
   categorySchema,
+  updateCategorySchema,
 };

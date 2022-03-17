@@ -10,7 +10,17 @@ const createCategory = async (name, time, menuId) => {
 
     return categoryCreated;
   } catch (error) {
-    console.log(error);
+    throw error;
+  }
+};
+
+const updateCategory = async (name, time, id) => {
+  try {
+    let updateCategory = await Category.findByIdAndUpdate(id, {
+      $set: { name: name, time: time },
+    });
+    return updateCategory;
+  } catch (error) {
     throw error;
   }
 };
@@ -24,4 +34,4 @@ const fetchCategoriesByMenuID = async (menuId) => {
   }
 };
 
-module.exports = { createCategory, fetchCategoriesByMenuID };
+module.exports = { createCategory, fetchCategoriesByMenuID, updateCategory };
