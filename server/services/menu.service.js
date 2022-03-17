@@ -7,6 +7,7 @@ const createMenu = async (name, businessId, menuReference) => {
     let menuCreated = new Menu({ name, businessId, menuReference });
 
     await menuCreated.save();
+
     return menuCreated;
   } catch (error) {
     console.log(error);
@@ -22,4 +23,13 @@ const findDefaultMenu = async (businessId) => {
     throw error;
   }
 };
-module.exports = { createMenu, findDefaultMenu };
+
+const findMenuByReference = async (menuReference) => {
+  try {
+    let findMenuByReference = await Menu.findOne({ menuReference });
+    return findMenuByReference;
+  } catch (error) {
+    throw error;
+  }
+};
+module.exports = { createMenu, findDefaultMenu, findMenuByReference };

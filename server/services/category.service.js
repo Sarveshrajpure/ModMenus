@@ -4,9 +4,10 @@ const httpStatus = require("http-status");
 
 const createCategory = async (name, time, menuId) => {
   try {
-    let categoryCreated = new Category({ name, time, menuId });
+    const categoryCreated = new Category({ name, time, menuId });
 
     await categoryCreated.save();
+
     return categoryCreated;
   } catch (error) {
     console.log(error);
@@ -14,4 +15,13 @@ const createCategory = async (name, time, menuId) => {
   }
 };
 
-module.exports = { createCategory };
+const fetchCategoriesByMenuID = async (menuId) => {
+  try {
+    let findCategoriesByMenuId = await Category.find({ menuId: menuId });
+    return findCategoriesByMenuId;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = { createCategory, fetchCategoriesByMenuID };
