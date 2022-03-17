@@ -1,15 +1,13 @@
 const Joi = require("@hapi/joi");
 const CONSTANTS = require("../constants/constants");
+Joi.objectId = require("joi-objectid")(Joi);
 
-const registerSchema = Joi.object({
+const categorySchema = Joi.object({
   name: Joi.string().min(4).max(255).required("Category name required"),
-  time: Joi.string().min(4).max(225).required(),
-  menuId: Joi.string()
-    .guid(CONSTANTS.APP_VALIDATIONS.idValidation)
-    .required("menuId required"),
+  time: Joi.string().min(4).max(225),
+  menuId: Joi.objectId(),
 });
 
 module.exports = {
-  registerSchema,
-  loginSchema,
+  categorySchema,
 };
