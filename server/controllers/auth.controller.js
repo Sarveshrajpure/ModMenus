@@ -1,4 +1,4 @@
-const { authService, menuService } = require("../services");
+const { authService, emailService } = require("../services");
 const { registerSchema, loginSchema } = require("../helpers/userValidations");
 const { ApiError } = require("../middlewares/apiError");
 const httpStatus = require("http-status");
@@ -53,7 +53,7 @@ const authController = {
         );
 
         ///send register email
-        
+        await emailService.registerEmail(value.email, value.firstname, user);
 
         //set access token to cookies
         res.cookie("x-access-token", token).status(httpStatus.CREATED).send({
