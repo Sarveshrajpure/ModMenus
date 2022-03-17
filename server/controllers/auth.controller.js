@@ -1,4 +1,4 @@
-const { authService, emailService } = require("../services");
+const { authService, emailService, menuService } = require("../services");
 const { registerSchema, loginSchema } = require("../helpers/userValidations");
 const { ApiError } = require("../middlewares/apiError");
 const httpStatus = require("http-status");
