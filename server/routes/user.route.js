@@ -10,4 +10,6 @@ router
   .get(auth(), userController.profile)
   .patch(auth(), userController.updateProfile);
 
+router.get("/verify", userController.verifyAccount);
+
 module.exports = router;

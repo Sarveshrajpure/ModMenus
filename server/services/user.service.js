@@ -1,6 +1,11 @@
 const { User } = require("../models/user");
 const ApiError = require("../middlewares/apiError");
 const httpStatus = require("http-status");
+const jwt = require("jsonwebtoken");
+
+const validateToken = async (token) => {
+  return jwt.verify(token, process.env.DB_SECRET);
+};
 
 const findUserByEmail = async (email) => {
   return User.findOne({ email });
@@ -12,7 +17,6 @@ const findUserById = async (_id) => {
 
 const updateUserProfile = async (req) => {
   try {
-     
     const user = await User.findOneAndUpdate(
       { _id: req.user._id },
       {
@@ -37,4 +41,5 @@ module.exports = {
   findUserByEmail,
   findUserById,
   updateUserProfile,
+  validateToken,
 };
