@@ -17,7 +17,8 @@ const createCategory = async (name, time, menuId) => {
 const updateCategory = async (name, time, id) => {
   try {
     let updateCategory = await Category.findByIdAndUpdate(id, {
-      $set: { name: name, time: time },
+      name: name,
+      time: time,
     });
     return updateCategory;
   } catch (error) {
@@ -34,4 +35,18 @@ const fetchCategoriesByMenuID = async (menuId) => {
   }
 };
 
-module.exports = { createCategory, fetchCategoriesByMenuID, updateCategory };
+const deleteCategory = async (categoryId) => {
+  try {
+    let deletedCategory = await Category.deleteOne({ _id: categoryId });
+    return deletedCategory;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = {
+  createCategory,
+  fetchCategoriesByMenuID,
+  updateCategory,
+  deleteCategory,
+};

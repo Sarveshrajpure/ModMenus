@@ -23,4 +23,20 @@ const fetchFoodItemsByCategoryId = async (categoryId) => {
   }
 };
 
-module.exports = { BulkCreateFoodItem, fetchFoodItemsByCategoryId };
+const updateFoodItem = async (name, description, fooItemId) => {
+  try {
+    let updatedFoodItem = await FoodItem.findByIdAndUpdate(fooItemId, {
+      name: name,
+      description: description,
+    });
+    return updatedFoodItem;
+  } catch (error) {
+    throw error;
+  }
+};
+
+module.exports = {
+  BulkCreateFoodItem,
+  fetchFoodItemsByCategoryId,
+  updateFoodItem,
+};

@@ -20,7 +20,7 @@ router.delete("/deletecategory", auth(), menucardController.deleteCategory);
 router.post("/createfoodItem", auth(), menucardController.createFoodItems);
 
 ///api/menucard/updatefoodItem
-router.patch("/updatefood", auth(), menucardController.updateFoodItem);
+router.patch("/updatefooditem", auth(), menucardController.updateFoodItem);
 
 ///api/menucard/deletefoodItems
 router.delete("/deletefooditem", auth(), menucardController.deleteFooditem);

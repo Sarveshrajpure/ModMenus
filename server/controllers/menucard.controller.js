@@ -6,8 +6,12 @@ const {
 const {
   categorySchema,
   updateCategorySchema,
+  deleteCategorySchema,
 } = require("../helpers/categoryValidations.js");
-const { foodItemSchema } = require("../helpers/foodItemValidations.js");
+const {
+  foodItemSchema,
+  updateFoodItemSchema,
+} = require("../helpers/foodItemValidations.js");
 const { ApiError } = require("../middlewares/apiError");
 const httpStatus = require("http-status");
 
@@ -95,17 +99,61 @@ const menucardController = {
       if (updateCategory) {
         res
           .status(httpStatus.OK)
-          .send({ message: "Category Updated Successfully" });
+          .send({ message: "Category Updated Successfully!" });
       }
     } catch (error) {
       next(error);
     }
   },
-  async updateFoodItem() {},
+  async updateFoodItem(req, res, next) {
+    try {
+      let value = await updateFoodItemSchema.validateAsync(req.body);
+
+      let updateFoodItem = await foodItemService.updateFoodItem(
+        value.name,
+        value.description,
+        value.foodItemId
+      );
+
+      if (updateFoodItem) {
+        res
+          .status(httpStatus.OK)
+          .send({ message: "Food Item Updated Successfully!" });
+      }
+    } catch (error) {
+      next(error);
+    }
+  },
 
   //Delete Apis
 
-  async deleteCategory() {},
+  async deleteCategory(req, res, next) {
+    try {
+      let value = await deleteCategorySchema.validateAsync(req.body);
+
+      let getFooditemsForCategory =
+        await foodItemService.fetchFoodItemsByCategoryId(value.categoryId);
+      if (getFooditemsForCategory.length > 0) {
+        let foodItemsCount = getFooditemsForCategory.length;
+        res.status(httpStatus.METHOD_NOT_ALLOWED).send({
+          message: `Category cannot be delete as it containes ${foodItemsCount} food items,consider deleting these food items of this category before deleting it.`,
+        });
+      }
+
+      let deleteCategory = await categoryService.deleteCategory(
+        value.categoryId
+      );
+
+      if (deleteCategory) {
+        res
+          .status(httpStatus.OK)
+          .send({ message: "Category delete sucessfully!" });
+      }
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  },
   async deleteFooditem() {},
   async deleteAllFooditem() {},
 };
