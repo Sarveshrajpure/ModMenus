@@ -35,8 +35,30 @@ const updateFoodItem = async (name, description, fooItemId) => {
   }
 };
 
+const deleteSingleFoodItem = async (foodItemId) => {
+  try {
+    let deletdFoodItem = await FoodItem.deleteOne({ _id: foodItemId });
+    return deletdFoodItem;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deleteAllFoodItems = async (categoryId) => {
+  try {
+    let deletedFoodItems = await FoodItem.deleteMany({
+      categoryId: categoryId,
+    });
+    return deletedFoodItems;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   BulkCreateFoodItem,
   fetchFoodItemsByCategoryId,
   updateFoodItem,
+  deleteSingleFoodItem,
+  deleteAllFoodItems,
 };

@@ -23,7 +23,7 @@ const foodItemSchema = mongoose.Schema({
     type: Array,
     default: [],
   },
-});
+},{timestamps:true});
 
 const FoodItem = mongoose.model("FoodItem", foodItemSchema);
 

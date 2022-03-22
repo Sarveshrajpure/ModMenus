@@ -17,7 +17,12 @@ const updateFoodItemSchema = Joi.object({
   foodItemId: Joi.objectId().required(),
 });
 
+const deleteFoodItemSchema = Joi.object({
+  foodItemId: Joi.objectId(),
+});
+
 module.exports = {
   foodItemSchema,
   updateFoodItemSchema,
+  deleteFoodItemSchema,
 };

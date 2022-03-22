@@ -2,53 +2,57 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { date } = require("@hapi/joi");
 require("dotenv").config();
 
-const userSchema = mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    validate(value) {
-      if (!validator.isEmail(value)) {
-        throw new Error("Invalid Email");
-      }
+const userSchema = mongoose.Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      validate(value) {
+        if (!validator.isEmail(value)) {
+          throw new Error("Invalid Email");
+        }
+      },
+    },
+    password: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    firstname: {
+      type: String,
+      required: true,
+      maxLength: 100,
+      trim: true,
+    },
+    lastname: { type: String, required: true, maxLength: 100, trim: true },
+
+    businessname: {
+      type: String,
+      required: true,
+      maxLength: 100,
+      trim: true,
+      unique: true,
+    },
+
+    phone: {
+      type: String,
+      require: true,
+      maxLength: 12,
+      trim: true,
+      unique: true,
+    },
+    verified: {
+      type: Boolean,
+      default: false,
     },
   },
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  firstname: {
-    type: String,
-    required: true,
-    maxLength: 100,
-    trim: true,
-  },
-  lastname: { type: String, required: true, maxLength: 100, trim: true },
-
-  businessname: {
-    type: String,
-    required: true,
-    maxLength: 100,
-    trim: true,
-    unique: true,
-  },
-
-  phone: {
-    type: String,
-    require: true,
-    maxLength: 12,
-    trim: true,
-    unique: true,
-  },
-  verified: {
-    type: Boolean,
-    default: false,
-  },
-});
+  { timestamps: true }
+);
 
 userSchema.pre("save", async function (next) {
   let user = this;

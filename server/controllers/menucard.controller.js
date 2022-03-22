@@ -11,6 +11,7 @@ const {
 const {
   foodItemSchema,
   updateFoodItemSchema,
+  deleteFoodItemSchema,
 } = require("../helpers/foodItemValidations.js");
 const { ApiError } = require("../middlewares/apiError");
 const httpStatus = require("http-status");
@@ -38,7 +39,6 @@ const menucardController = {
       let value = await foodItemSchema.validateAsync(req.body);
 
       let foodItemCreated = await foodItemService.BulkCreateFoodItem(value);
-      console.log(foodItemCreated);
 
       res.status(httpStatus.CREATED).send(foodItemCreated);
     } catch (error) {
@@ -136,7 +136,7 @@ const menucardController = {
       if (getFooditemsForCategory.length > 0) {
         let foodItemsCount = getFooditemsForCategory.length;
         res.status(httpStatus.METHOD_NOT_ALLOWED).send({
-          message: `Category cannot be delete as it containes ${foodItemsCount} food items,consider deleting these food items of this category before deleting it.`,
+          message: `Category cannot be delete as it containes ${foodItemsCount} food items,consider deleting these food items before deleting category.`,
         });
       }
 
@@ -150,12 +150,43 @@ const menucardController = {
           .send({ message: "Category delete sucessfully!" });
       }
     } catch (error) {
-      console.log(error);
       next(error);
     }
   },
-  async deleteFooditem() {},
-  async deleteAllFooditem() {},
+  async deleteFooditem(req, res, next) {
+    try {
+      let value = await deleteFoodItemSchema.validateAsync(req.body);
+
+      let deleteFoodItem = await foodItemService.deleteSingleFoodItem(
+        value.foodItemId
+      );
+
+      if (deleteFoodItem) {
+        res
+          .status(httpStatus.OK)
+          .send({ message: "Food item deleted successfully!" });
+      }
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async deleteAllFooditem(req, res, next) {
+    try {
+      let value = await deleteCategorySchema.validateAsync(req.body);
+
+      let deleteAllFooditems = await foodItemService.deleteAllFoodItems(
+        value.categoryId
+      );
+      if (deleteAllFooditems) {
+        res
+          .status(httpStatus.OK)
+          .send({ message: "All food items delted for this category" });
+      }
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = menucardController;
