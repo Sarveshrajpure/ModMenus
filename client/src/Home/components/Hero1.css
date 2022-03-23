@@ -3,7 +3,7 @@
 }
 
 .mockimg {
-  width: 22rem;
+  width: max-content;
 }
 .typingTxt {
   color: #ee6c4d;

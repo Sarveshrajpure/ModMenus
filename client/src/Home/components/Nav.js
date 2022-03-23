@@ -11,7 +11,7 @@ const Nav = () => {
   };
   return (
     <div className="navWrapper">
-      <div className="navBlock px-2 py-2 flex justify-between items-center ">
+      <div className="navBlock px-6 md:px-12 lg:px-20 py-4 flex justify-between items-center ">
         <div className=" flex ">
           <img
             className=" w-2/5  md:w-2/3 lg:w-2/3 "

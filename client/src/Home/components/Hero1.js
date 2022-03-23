@@ -13,13 +13,13 @@ const Hero1 = () => {
   return (
     <div className="hero1Wrapper">
       <div
-        className="textAnimationBlock  px-8 py-6
+        className="textAnimationBlock  
       
-      lg:px-10 lg:py-10 lg:flex justify-between
+       lg:flex justify-between
       items-center
       "
       >
-        <div className="text-4xl  md:text43xl  lg:text-4xl">
+        <div className="text-4xl  md:text-3xl  lg:text-4xl   px-2 py-4  lg:px-20  ">
           <p>Create your easy to </p>
 
           <Typical
