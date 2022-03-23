@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { date } = require("@hapi/joi");
 require("dotenv").config();
 
 const userSchema = mongoose.Schema(

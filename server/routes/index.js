@@ -1,7 +1,8 @@
 const express = require("express");
 const authRoute = require("./auth.route");
 const userRoute = require("./user.route");
-const menucard = require("./menucard.route");
+const menucardRoute = require("./menucard.route");
+const guestRoute = require("./guest.route");
 const router = express.Router();
 
 const routesIndex = [
@@ -15,7 +16,11 @@ const routesIndex = [
   },
   {
     path: "/menucard",
-    route: menucard,
+    route: menucardRoute,
+  },
+  {
+    path: "/guest",
+    route: guestRoute,
   },
 ];
 
