@@ -31,7 +31,7 @@ const RegisterForm = () => {
         }
       }
     } catch (err) {
-      if (err.response.data) {
+      if (err.response) {
         setRegisterError(err.response.data.message);
       } else {
         setRegisterError(err.message);

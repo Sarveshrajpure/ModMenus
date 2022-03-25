@@ -24,16 +24,16 @@ const LoginForm = () => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-
+    console.log(data);
     try {
       if (data) {
         let response = await LoginUser(data);
         if (response) {
-          navigate("/home");
+          navigate("/");
         }
       }
     } catch (err) {
-      if (err.response.data) {
+      if (err.response) {
         setLoginError(err.response.data.message);
       } else {
         setLoginError(err.message);
