@@ -1,15 +1,21 @@
 import * as yup from "yup";
 
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+const strongPasswordRegex =
+  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/;
+
 export const registerSchema = yup.object().shape({
-  firstName: yup
+  firstname: yup
     .string()
     .max(15, "Must be 15 characters or less")
     .required("Required"),
-  lastName: yup
+  lastname: yup
     .string()
     .max(20, "Must be 20 characters or less")
     .required("Required"),
-  businessName: yup
+  businessname: yup
     .string()
     .max(25, "Must be 25 characters or less")
     .required("Required"),
@@ -19,10 +25,18 @@ export const registerSchema = yup.object().shape({
     .required("Email is required"),
   password: yup
     .string()
+    .matches(
+      strongPasswordRegex,
+      "Password must be strong. At least one upper case alphabet. At least one lower case alphabet. At least one digit. At least one special character. Minimum six in length"
+    )
     .min(6, "Password must be at least 6 characters")
     .required("Password is Required"),
-  confirmPassword: yup
+  confirmpassword: yup
     .string()
     .oneOf([yup.ref("password"), null], "Password must match")
     .required("Confirm password is required"),
+  phone: yup
+    .string()
+    .matches(phoneRegExp, "Enter valid Contact number")
+    .required("Contact number is required"),
 });
