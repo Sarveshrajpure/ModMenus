@@ -9,7 +9,7 @@ const Hero2 = () => {
   return (
     <div className="hero2Wrapper">
       <div className="hero2Block">
-        <div className="hero2Title text-center  font-bold text-5xl py-10">
+        <div className="hero2Title text-center  font-bold text-4xl md:text-5xl lg:text-5xl py-10">
           Why go with Mod Menus?
         </div>
         <div className="hero2CardWrapper px-2 lg:flex lg:justify-around md:flex md:justify-around lg:px-40 md:px-40">
