@@ -28,7 +28,7 @@ const Hero1 = () => {
             steps={["Implement 💻", 1800, "Access 🤳", 1800]}
             className="typingTxt"
           />
-          <p> mobile menu in less than a seconds!</p>
+          <p> mobile menu in less than 10 minutes!</p>
 
           <div
             className="createMenuBtn    mt-6   text-2xl   md:text-2xl md:mt-6  lg:text-2xl md:mt-10"
