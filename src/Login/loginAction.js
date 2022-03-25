@@ -25,6 +25,8 @@ export const userIsAuth = () => {
         throw new Error("Unauthorized");
       }
       const user = await axiosInstance.get("/api/auth/isauth", getAuthHeader());
+
+      return user;
     } catch (error) {}
   };
 };
