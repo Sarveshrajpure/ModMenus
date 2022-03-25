@@ -1,18 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import mm_logo from "../../assests/mm_logo.svg";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../../validations/registerValidation";
+import { RegisterUser } from "../registerAction";
 
 import "./RegisterForm.css";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
-
-  const navigateTo = async () => {
-    navigate("/login");
-  };
+  const [registerError, setRegisterError] = useState();
 
   const {
     register,
@@ -24,8 +22,21 @@ const RegisterForm = () => {
   });
 
   const onSubmit = async (data, e) => {
-    console.log(data);
     e.preventDefault();
+    try {
+      if (data) {
+        let response = await RegisterUser(data);
+        if (response) {
+          navigate("/login");
+        }
+      }
+    } catch (err) {
+      if (err.response.data) {
+        setRegisterError(err.response.data.message);
+      } else {
+        setRegisterError(err.message);
+      }
+    }
   };
   return (
     <div className="registerFormWrapper  py-2">
@@ -43,7 +54,7 @@ const RegisterForm = () => {
             <div className="mb-4 ">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="firstName"
+                for="firstname"
               >
                 First Name
               </label>
@@ -52,25 +63,25 @@ const RegisterForm = () => {
               rounded w-full py-2 px-3 text-gray-700 
               leading-tight focus:outline-none
                focus:shadow-outline"
-                id="firstName"
-                name="firstName"
+                id="firstname"
+                name="firstname"
                 type="text"
                 placeholder="First Name"
-                {...register("firstName")}
+                {...register("firstname")}
               />{" "}
               {
                 <div
                   className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
-                  style={errors.firstName ? { display: "block" } : {}}
+                  style={errors.firstname ? { display: "block" } : {}}
                 >
-                  {errors.firstName?.message}
+                  {errors.firstname?.message}
                 </div>
               }
             </div>
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="lastName"
+                for="lastname"
               >
                 Last Name
               </label>
@@ -79,18 +90,18 @@ const RegisterForm = () => {
               rounded w-full py-2 px-3 text-gray-700 
               leading-tight focus:outline-none
                focus:shadow-outline"
-                id="lastName"
-                name="lastName"
+                id="lastname"
+                name="lastname"
                 type="text"
                 placeholder="Last Name"
-                {...register("lastName")}
+                {...register("lastname")}
               />{" "}
               {
                 <div
                   className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
-                  style={errors.lastName ? { display: "block" } : {}}
+                  style={errors.lastname ? { display: "block" } : {}}
                 >
-                  {errors.lastName?.message}
+                  {errors.lastname?.message}
                 </div>
               }
             </div>
@@ -98,7 +109,7 @@ const RegisterForm = () => {
           <div className="mb-4 ">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              for="businessName"
+              for="businessname"
             >
               Business Name
             </label>
@@ -107,18 +118,45 @@ const RegisterForm = () => {
               rounded w-full py-2 px-3 text-gray-700 
               leading-tight focus:outline-none
                focus:shadow-outline"
-              id="businessName"
-              name="businessName"
+              id="businessname"
+              name="businessname"
               type="text"
               placeholder="Business Name"
-              {...register("businessName")}
+              {...register("businessname")}
             />{" "}
             {
               <div
                 className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
-                style={errors.businessName ? { display: "block" } : {}}
+                style={errors.businessname ? { display: "block" } : {}}
               >
-                {errors.businessName?.message}
+                {errors.businessname?.message}
+              </div>
+            }
+          </div>
+          <div className="mb-4 ">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              for="phone"
+            >
+              Contact number
+            </label>
+            <input
+              className="appearance-none border 
+              rounded w-full py-2 px-3 text-gray-700 
+              leading-tight focus:outline-none
+               focus:shadow-outline"
+              id="phone"
+              name="phone"
+              type="text"
+              placeholder="Contact number"
+              {...register("phone")}
+            />{" "}
+            {
+              <div
+                className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
+                style={errors.phone ? { display: "block" } : {}}
+              >
+                {errors.phone?.message}
               </div>
             }
           </div>
@@ -126,7 +164,7 @@ const RegisterForm = () => {
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              for="Email"
+              for="email"
             >
               Email
             </label>
@@ -180,7 +218,7 @@ const RegisterForm = () => {
           <div className="mb-6">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              for="confirmPassword"
+              for="confirmpassword"
             >
               Confirm Password
             </label>
@@ -189,20 +227,26 @@ const RegisterForm = () => {
               rounded w-full py-2 px-3 text-gray-700 
               leading-tight focus:outline-none
                focus:shadow-outline"
-              id="confirmPassword"
-              name="confirmPassword"
+              id="confirmpassword"
+              name="confirmpassword"
               type="password"
               placeholder="Confirm Password"
-              {...register("confirmPassword")}
+              {...register("confirmpassword")}
             />
             {
               <div
                 className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
-                style={errors.confirmPassword ? { display: "block" } : {}}
+                style={errors.confirmpassword ? { display: "block" } : {}}
               >
-                {errors.confirmPassword?.message}
+                {errors.confirmpassword?.message}
               </div>
             }
+          </div>
+          <div
+            className="invalid-feedback text-center text-red-500 text-xs px-2 py-2  pt-1 "
+            style={registerError ? { display: "block" } : {}}
+          >
+            {registerError ? registerError : null}
           </div>
           <div className="flex justify-center">
             <button
@@ -213,16 +257,10 @@ const RegisterForm = () => {
               Register
             </button>
           </div>
+
           <div className="goToLoginLinkBlock text-center   mt-4 text-xs lg:text-sm md:text-sm ">
             <div>Already registered? </div>
-            <div
-              className="goToLoginLink px-1"
-              onClick={() => {
-                navigateTo();
-              }}
-            >
-              Login
-            </div>
+            <div className="goToLoginLink px-1">Login</div>
           </div>
         </form>
         <p class="text-center text-gray-500 text-xs mt-4">
