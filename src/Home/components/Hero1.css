@@ -1,0 +1,24 @@
+.textAnimationBlock {
+  line-height: 4rem;
+}
+
+.mockimg {
+  width: max-content;
+}
+.typingTxt {
+  color: #ee6c4d;
+}
+
+.createMenuBtn {
+  background-color: #98c1d9;
+  width: max-content;
+  border-radius: 2rem;
+  padding: 0.3rem 1rem 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+}
+
+.createMenuBtn:hover {
+  background-color: #004466;
+  color: #ffff;
+}
