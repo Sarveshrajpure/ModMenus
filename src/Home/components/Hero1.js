@@ -15,7 +15,8 @@ const Hero1 = () => {
       <div
         className="textAnimationBlock  
       
-       lg:flex justify-between
+       lg:flex lg:justify-between
+       md:flex md:justify-between
       items-center
       "
       >
@@ -31,7 +32,7 @@ const Hero1 = () => {
           <p> mobile menu in less than a minute!</p>
 
           <div
-            className="createMenuBtn    mt-6   text-2xl   md:text-2xl md:mt-6  lg:text-2xl md:mt-10"
+            className="createMenuBtn    mt-6   text-2xl   md:text-2xl   lg:text-2xl md:mt-10"
             onClick={() => {
               navigateTo();
             }}
