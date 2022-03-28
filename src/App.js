@@ -4,6 +4,7 @@ import Home from "./Home";
 import Register from "./Register";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
+import Menu from "./Menu";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
+        <Route exact path="/menu/:menuReference" element={<Menu />} />
       </Routes>
     </BrowserRouter>
   );
