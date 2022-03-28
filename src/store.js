@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore } from "redux";
-import rootReducer from "./Reducers";
+import rootReducer from "./reducers";
 import ReduxThunk from "redux-thunk";
 import promiseMiddleware from "redux-promise";
 import { persistStore } from "redux-persist";
