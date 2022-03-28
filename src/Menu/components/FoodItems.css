@@ -1,0 +1,29 @@
+.foodItemContainer {
+  background-color: #faf8f8;
+}
+
+.foodItemImg {
+  height: 100%;
+}
+
+.foodItemDescription {
+  letter-spacing: 1px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.2;
+  white-space: pre-wrap;
+}
+
+.foodItemName {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.foodItemImg {
+  max-width: 45vw;
+  max-height: 45vw;
+}
