@@ -1,7 +1,6 @@
 import React from "react";
 import "./Hero3.css";
 import dashboardSvg from "../../assests/dashboard.svg";
-import menucard from "../../assests/menucard.svg";
 
 const Hero3 = () => {
   return (
