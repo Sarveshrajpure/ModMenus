@@ -6,7 +6,6 @@
   /* Center vertically */
   display: flex;
   align-items: center;
-  background-color: rgb(235, 235, 235);
   min-height: 100vh;
 }
 
@@ -18,7 +17,7 @@
   background-color: #98c1d9;
   width: 80%;
   text-align: center;
-  border-radius: 2rem;
+  border-radius: 0.5rem;
   padding: 0.3rem 1rem 0.5rem 1rem;
   cursor: pointer;
   transition: all 200ms ease-in;
@@ -38,9 +37,5 @@
   color: #004466;
   font-weight: 600;
   cursor: pointer;
-  transition: all 200ms ease-in;
 }
 
-.goToLoginLink:hover {
-  font-size: medium;
-}

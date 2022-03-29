@@ -14,7 +14,7 @@ const Hero1 = () => {
     <div className="hero1Wrapper">
       <div
         className="textAnimationBlock  
-      
+      pt-20
        lg:flex lg:justify-between
        md:flex md:justify-between
       items-center
@@ -27,7 +27,7 @@ const Hero1 = () => {
             loop={Infinity}
             wrapper="b"
             steps={["Implement 💻", 1800, "Access 🤳", 1800]}
-            className="typingTxt"
+            className="text-orange-600"
           />
           <p> mobile menu in less than 10 minutes!</p>
 

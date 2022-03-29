@@ -5,7 +5,7 @@ import mm_logo from "../../assests/mm_logo.svg";
 const Footer = () => {
   return (
     <div className="footerWrapper">
-      <div className="footerBlock mt-12  py-10 ">
+      <div className="footerBlock mt-12  py-10 p-5 ">
         <div className="footerInfoBlock flex ">
           <div className="footerQuickLinkGetInTouchBlock w-5/6 lg:w-2/3 lg:flex   md:w-2/3 md:flex ">
             <div className="footerQuickLinkBlock lg:w-2/4 md:w-2/4 py-2  lg:pl-20 md:pl-20">
