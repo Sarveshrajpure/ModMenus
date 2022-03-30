@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Categories from "./components/Categories";
 import { getMenu } from "./MenuActrions";
 import spinnerGif from "../assests/spinner.gif";
+import MenuFooter from "./components/ModMenuFooter";
 
 const Menu = () => {
   const { menuReference } = useParams();
@@ -37,7 +38,7 @@ const Menu = () => {
         </div>
       ) : (
         <div className="menuContainer  flex justify-center h-max  bg-slate-50 ">
-          <div className="menuContent  justify-items-center h-screen bg-white  lg:w-1/4 p-5">
+          <div className="menuContent  justify-items-center h-max bg-white  lg:w-1/4 p-5">
             <div className="businessInfo p-2 bg-black text-4xl  text-white rounded">
               {menuData ? menuData.menuData.businessName : ""}'s Menu
             </div>
@@ -52,6 +53,7 @@ const Menu = () => {
                   );
                 })
               : ""}
+            <MenuFooter />
           </div>
         </div>
       )}

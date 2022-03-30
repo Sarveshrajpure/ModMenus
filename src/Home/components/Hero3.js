@@ -4,12 +4,12 @@ import dashboardSvg from "../../assests/dashboard.svg";
 
 const Hero3 = () => {
   return (
-    <div className="hero3Wrapper">
+    <div className="hero3Wrapper mt-10 mb-20">
       <div className="hero3block">
         <div className="hero3Title text-center font-bold text-4xl md:text-5xl lg:text-5xl py-10">
           Manage, Track & get feedback
         </div>
-        <div className="hero2CardWrapper  lg:flex lg:justify-between  lg:px-80 md:px-40">
+        <div className="hero3CardWrapper  lg:flex lg:justify-between  lg:px-80 md:px-40">
           <div className="hero3Left flex justify-center ">
             <img className="w-64" src={dashboardSvg} alt="dashboard" />
           </div>
