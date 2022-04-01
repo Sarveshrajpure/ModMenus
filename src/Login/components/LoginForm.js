@@ -3,7 +3,6 @@ import mm_logo from "../../assests/mm_logo.svg";
 
 import { LoginUser } from "../loginAction";
 import "./LoginForm.css";
-
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -27,13 +26,14 @@ const LoginForm = () => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    console.log(data);
+
     try {
       if (data) {
         let response = await LoginUser(data);
+
         if (response) {
           dispatch(login_user(response));
-          navigate("/");
+          navigate("/dashboard");
         }
       }
     } catch (err) {
