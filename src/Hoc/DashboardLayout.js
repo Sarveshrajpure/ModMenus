@@ -62,6 +62,15 @@ const DashboardLayout = (props) => {
             {getLinks(links)}
           </div>
         </div>
+
+        <div className="dashboardLayoutRightWrapper">
+          <div className="dashboardLayoutRightTitle">
+            <h1>{props.Title}</h1>
+          </div>
+          <div className="dashboardLayoutRightContentContainer">
+            {props.children}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -8,8 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../validations/loginValidations";
+import { useDispatch } from "react-redux";
+import { login_user } from "../../Actions/userActions";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState();
 
@@ -29,6 +32,7 @@ const LoginForm = () => {
       if (data) {
         let response = await LoginUser(data);
         if (response) {
+          dispatch(login_user(response));
           navigate("/");
         }
       }
