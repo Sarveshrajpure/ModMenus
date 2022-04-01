@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { LoginUser } from "../loginAction";
-import { login_user } from "../../Actions/types";
+import { login_user } from "../../Actions/userActions";
 import "./LoginForm.css";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
