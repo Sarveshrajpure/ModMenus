@@ -25,7 +25,13 @@ const DashboardLayout = (props) => {
   const [menu, setMenu] = useState("close");
   const getLinks = (links) =>
     links.map((item, i) => (
-      <div className={`dashboardLayoutlink ${menu} py-2 px-2  lg:py-4`}>
+      <div
+        className={`dashboardLayoutlink ${menu} py-2 px-2  lg:py-4`}
+        key={i}
+        onClick={() => {
+          props.setChoice(links.name[i]);
+        }}
+      >
         <Link to={item.linkTo} key={`${links.name}${i}`}>
           {item.name}
         </Link>
@@ -66,6 +72,15 @@ const DashboardLayout = (props) => {
             className={`dashboardLayoutLeftNavLinks ${menu} ${open}  lg:block  lg:pl-10   `}
           >
             {getLinks(links)}
+          </div>
+        </div>
+
+        <div className="dashboardLayoutRightWrapper">
+          <div className="dashboardLayoutRightTitle">
+            <h1>{props.Title} aabbcc</h1>
+          </div>
+          <div className="dashboardLayoutRightContentContainer">
+            {props.children}
           </div>
         </div>
       </div>

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-
-
+import { useDispatch } from "react-redux";
 import { LoginUser } from "../loginAction";
+import { login_user } from "../../Actions/userActions";
 import "./LoginForm.css";
-
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,6 +11,7 @@ import Nav from "../../Home/components/Nav";
 import Footer from "../../Home/components/Footer";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginError, setLoginError] = useState();
 
@@ -26,12 +26,14 @@ const LoginForm = () => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    console.log(data);
+
     try {
       if (data) {
         let response = await LoginUser(data);
+
         if (response) {
-          navigate("/");
+          dispatch(login_user(response));
+          navigate("/dashboard");
         }
       }
     } catch (err) {

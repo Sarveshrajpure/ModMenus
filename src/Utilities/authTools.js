@@ -1,8 +1,8 @@
 import cookie from "react-cookies";
 
-export const getTokenCookie = () => cookie.load("w_auth");
+export const getTokenCookie = () => cookie.load("x-access-token");
 export const removeTokenCookie = () => {
-  cookie.remove("w_auth", { path: "/" });
+  cookie.remove("x-access-token", { path: "/" });
 };
 export const getAuthHeader = () => {
   return { headers: { Authorization: `Bearer ${getTokenCookie()}` } };

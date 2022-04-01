@@ -18,17 +18,16 @@ export const LoginUser = async (values) => {
   return loginInfo.data;
 };
 
-export const userIsAuth = () => {
-  return async (dispatch) => {
-    try {
-      if (!getTokenCookie()) {
-        throw new Error("Unauthorized");
-      }
-      const user = await axiosInstance.get("/api/auth/isauth", getAuthHeader());
+export const userIsAuth = async () => {
+  console.log("in user auth");
+  if (!getTokenCookie()) {
+    return false;
+  } else {
+    const user = await axiosInstance.get("/auth/isauth", getAuthHeader());
+    console.log("user exists");
 
-      return user;
-    } catch (error) {}
-  };
+    return user;
+  }
 };
 
 export const userSignOut = () => {
