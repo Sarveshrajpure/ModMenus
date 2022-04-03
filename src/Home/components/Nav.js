@@ -1,14 +1,29 @@
 import React from "react";
 import mm_logo from "../../assests/mm_logo.svg";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./Nav.css";
 
 const Nav = (isHomePage) => {
   const navigate = useNavigate();
   console.log(isHomePage);
 
+  const user = useSelector((state) =>
+    state.User.user_verification ? state.User.user_verification : ""
+  );
+
+  function capitalizeFirstLetter(string) {
+    if (string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+  }
+
   const navigateTo = async () => {
-    navigate("/login");
+    if (user) {
+      navigate("/dashboard");
+    } else {
+      navigate("/login");
+    }
   };
   return (
     <div className="navWrapper">
@@ -33,7 +48,7 @@ const Nav = (isHomePage) => {
               navigateTo();
             }}
           >
-            Login
+            {user ? capitalizeFirstLetter(user.firstname) : "Login"}
           </div>
         ) : (
           ""

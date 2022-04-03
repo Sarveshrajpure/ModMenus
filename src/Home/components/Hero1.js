@@ -1,14 +1,22 @@
 import React from "react";
 import Typical from "react-typical";
 import mockup from "../../assests/mockup.png";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./Hero1.css";
 
 const Hero1 = () => {
   const navigate = useNavigate();
+  const user = useSelector((state) =>
+    state.User.user_verification ? state.User.user_verification : null
+  );
 
   const navigateTo = async () => {
-    navigate("/register");
+    if (user) {
+      navigate("/dashboard");
+    } else {
+      navigate("/register");
+    }
   };
   return (
     <div className="hero1Wrapper">
@@ -37,7 +45,7 @@ const Hero1 = () => {
               navigateTo();
             }}
           >
-            Create Menu
+            {user ? "Manage Menu" : " Create Menu"}
           </div>
         </div>
         <div>

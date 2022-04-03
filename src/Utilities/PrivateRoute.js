@@ -22,10 +22,11 @@ const PrivateRoute = () => {
         /* Update effect logic to track correct state */
         const isUserLogged = await userIsAuth();
         if (isUserLogged) {
-          // dispatch(verify_user({ ...isUserLogged.data, auth: true }));
+          console.log(isUserLogged);
+          dispatch(verify_user({ ...isUserLogged, auth: true }));
           setState(isUserLogged ? "loggedin" : "redirect");
         } else {
-          dispatch(verify_user({ ...state, auth: false }));
+          dispatch(verify_user({ auth: false }));
           setState(isUserLogged ? "loggedin" : "redirect");
         }
       } catch {

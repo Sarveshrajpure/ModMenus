@@ -5,11 +5,9 @@ import { useSelector } from "react-redux";
 const Dashboard = () => {
   const [option, setOption] = useState();
 
-  // const user = useSelector((state) =>
-  //   state.Login_Register_Info.loginInfo
-  //     ? state.Login_Register_Info.loginInfo.email
-  //     : null
-  // );
+  const user = useSelector((state) =>
+    state.User.user_verification ? state.User.user_verification : null
+  );
   return (
     <div className="dashboardWrapper">
       <DashboardLayout
@@ -17,7 +15,13 @@ const Dashboard = () => {
         setChoice={(val) => {
           setOption(val);
         }}
-      ></DashboardLayout>
+      >
+
+
+
+ 
+
+      </DashboardLayout>
     </div>
   );
 };

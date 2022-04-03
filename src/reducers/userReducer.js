@@ -25,7 +25,7 @@ const userReducer = (state = { loginInfo: userDefault }, action) => {
     case VERIFY_USER:
       return {
         ...state,
-        loginInfo: { ...state.data, ...action.payload.data },
+        user_verification: { ...state.data, ...action.payload.data },
         auth: action.payload.auth,
       };
     case REGISTER_USER:
