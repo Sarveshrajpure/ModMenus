@@ -1,7 +1,4 @@
-import {
-  Navigate,
-  Outlet,
-} from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { verify_user } from "../Actions/userActions";
@@ -19,10 +16,11 @@ const PrivateRoute = () => {
         const isUserLogged = await userIsAuth();
         if (isUserLogged) {
           console.log(isUserLogged);
-          dispatch(verify_user({ ...isUserLogged, auth: true }));
+          dispatch(verify_user({ user: { ...isUserLogged.data, auth: true } }));
           setState(isUserLogged ? "loggedin" : "redirect");
         } else {
-          dispatch(verify_user({ auth: false }));
+          console.log("cookie not found");
+          dispatch(verify_user({ user: null, auth: null }));
           setState(isUserLogged ? "loggedin" : "redirect");
         }
       } catch {
@@ -37,7 +35,7 @@ const PrivateRoute = () => {
     return <div>Loading..</div>;
   }
 
-  return state === "loggedin" ? <Outlet /> : <Navigate to="/login" />;
+  return state === "loggedin" ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default PrivateRoute;

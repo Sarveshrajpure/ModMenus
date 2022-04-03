@@ -9,7 +9,7 @@ const Nav = (isHomePage) => {
   console.log(isHomePage);
 
   const user = useSelector((state) =>
-    state.User.user_verification ? state.User.user_verification : ""
+    state.User.user_verification.user ? state.User.user_verification.user : ""
   );
 
   function capitalizeFirstLetter(string) {
