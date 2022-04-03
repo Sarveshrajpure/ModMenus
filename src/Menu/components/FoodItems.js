@@ -3,15 +3,17 @@ import "./FoodItems.css";
 import eggs_img from "../../assests/eggs_img.jpg";
 
 const FoodItems = ({ itemData }) => {
+  let Isimage = itemData.image;
+  console.log(Isimage.length);
   return (
     <React.Fragment>
-      {itemData.images.lenght > 0 ? (
+      {Isimage ? (
         <>
           <div className="foodItemContainer h-44 flex  mb-2 rounded">
             <div className="foodItemImg w-3/5 ">
               <img
                 className="foodItemImg  rounded-l lg:w-40"
-                src={eggs_img}
+                src={Isimage}
                 alt="Food-item"
               />
             </div>
