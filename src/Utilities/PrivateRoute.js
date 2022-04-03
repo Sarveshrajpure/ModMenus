@@ -29,7 +29,7 @@ const PrivateRoute = () => {
         setState("redirect");
       }
     })();
-  }, []);
+  }, [dispatch]);
 
   /* If in loading state, return loading message while waiting for 
  isValidToken to complete */
