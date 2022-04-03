@@ -4,11 +4,17 @@ import Categories from "./components/Categories";
 import { getMenu } from "./MenuActrions";
 import spinnerGif from "../assests/spinner.gif";
 import MenuFooter from "./components/ModMenuFooter";
+import CustomerRegisterModal from "./components/CustomerRegisterModal";
 
 const Menu = () => {
   const { menuReference } = useParams();
   const [menuData, setMenuData] = useState();
   const [spinner, setSpinner] = useState(false);
+  const [custRegisterModal, setCustRegisterModal] = useState(true);
+
+  const setModalCookie = () => {
+    document.cookie = "ModMenus_Register_modal_shown=true";
+  };
 
   useEffect(() => {
     async function getMenuData() {
@@ -22,6 +28,12 @@ const Menu = () => {
         console.log(error);
       }
     }
+    if (document.cookie.indexOf("ModMenus_Register_modal_shown") >= 0) {
+    } else {
+      setCustRegisterModal(true);
+    }
+
+    setModalCookie();
     getMenuData();
   }, [menuReference]);
 
@@ -39,6 +51,17 @@ const Menu = () => {
       ) : (
         <div className="menuContainer  flex justify-center h-max  bg-slate-50 ">
           <div className="menuContent  justify-items-center h-max bg-white  lg:w-1/4 p-5">
+            {custRegisterModal ? (
+              <CustomerRegisterModal
+                businessInfo={menuData}
+                closeModal={() => {
+                  setCustRegisterModal(false);
+                }}
+              />
+            ) : (
+              ""
+            )}
+
             <div className="businessInfo p-2 bg-black text-4xl  text-white rounded">
               {menuData ? menuData.menuData.businessName : ""}'s Menu
             </div>
