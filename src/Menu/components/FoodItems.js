@@ -1,6 +1,5 @@
 import React from "react";
 import "./FoodItems.css";
-import eggs_img from "../../assests/eggs_img.jpg";
 
 const FoodItems = ({ itemData }) => {
   let Isimage = itemData.image;
@@ -9,15 +8,15 @@ const FoodItems = ({ itemData }) => {
     <React.Fragment>
       {Isimage ? (
         <>
-          <div className="foodItemContainer h-44 flex  mb-2 rounded">
+          <div className="foodItemContainer h-40 flex  mb-2 rounded">
             <div className="foodItemImg w-3/5 ">
               <img
-                className="foodItemImg  rounded-l lg:w-40"
+                className="foodItemImgtag  rounded-l"
                 src={Isimage}
                 alt="Food-item"
               />
             </div>
-            <div className=" foodItemContent  w-3/5 p-2">
+            <div className=" foodItemContent  w-3/5 p-2 pl-1">
               <div className="h-4/5">
                 <div className="foodItemName text-md font-semibold pl-2 pt-1">
                   {itemData.name}
