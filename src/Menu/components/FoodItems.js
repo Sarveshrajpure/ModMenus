@@ -26,7 +26,9 @@ const FoodItems = ({ itemData }) => {
                 </p>
               </div>
 
-              <div className="fooditemPrice text-xs font-semibold p-2">$20</div>
+              <div className="fooditemPrice text-xs font-semibold p-2">
+                ₹{itemData.price}
+              </div>
             </div>
           </div>
         </>

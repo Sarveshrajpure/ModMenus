@@ -13,11 +13,11 @@ import PreventSigninRoute from "./Utilities/preventSignRoute";
 function App() {
   return (
     <Routes>
+      <Route exact path="/menu/:menuReference" element={<Menu />} />
       <Route exact path="/" element={<Home />} />
       <Route path="/" element={<PreventSigninRoute />}>
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/login" element={<Login />} />
-        <Route exact path="/menu/:menuReference" element={<Menu />} />
       </Route>
       <Route path="/" element={<PrivateRoute />}>
         <Route exact path="/dashboard" element={<Dashboard />} />

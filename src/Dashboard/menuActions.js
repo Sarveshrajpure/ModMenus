@@ -30,17 +30,11 @@ export const FetchCategory = async (values) => {
 };
 
 export const CreateFoodItem = async (values) => {
-  let data = {
-    name: values.name,
-    description: values.description,
-    categoryId: values.categoryId,
-    price: values.price,
-  };
-  console.log("in create food action");
+  console.log(values);
 
   const newFoodItem = await axiosInstance.post(
     "/menucard/createfoodItem",
-    data,
+    values,
     getAuthHeader()
   );
 

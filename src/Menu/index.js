@@ -10,7 +10,7 @@ const Menu = () => {
   const { menuReference } = useParams();
   const [menuData, setMenuData] = useState();
   const [spinner, setSpinner] = useState(false);
-  const [custRegisterModal, setCustRegisterModal] = useState(true);
+  const [custRegisterModal, setCustRegisterModal] = useState(false);
 
   const setModalCookie = () => {
     document.cookie = "ModMenus_Register_modal_shown=true";
