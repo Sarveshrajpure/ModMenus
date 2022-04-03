@@ -20,5 +20,5 @@ jobs:
           env:
            CI: false
         - run: npm i
-        - run: CI="" npm run build
+        - run: CI=false npm run build
           
