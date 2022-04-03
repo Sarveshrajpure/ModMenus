@@ -24,23 +24,14 @@
 .fa-bars.open {
   color: #004466;
 }
-
-
-.dashboardLayoutLeftNavWrapper{
-  background-color: red;
+.logoutBtn{
+  cursor: pointer;
 }
 
 
-.dashboardLayoutBlock{
-  background-color: blue;
-}
 
-.dashboardLayoutRightWrapper{
-  background-color: yellow;
-}
-.dashBoardTitle {
-  background-color: #a7d5ca;
-}
+
+
 
 
 /* .dashboardLayoutLeftNavLinks {

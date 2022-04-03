@@ -30,9 +30,8 @@ export const userIsAuth = async () => {
   }
 };
 
-export const userSignOut = () => {
+export const userSignOut = async () => {
   console.log("in delete cookie");
-  return async (dispatch) => {
-    removeTokenCookie();
-  };
+  await removeTokenCookie();
+  return true;
 };
