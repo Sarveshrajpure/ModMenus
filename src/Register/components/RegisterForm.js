@@ -4,14 +4,19 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { registerSchema } from "../../validations/registerValidation";
 import { RegisterUser } from "../registerAction";
+import { register_user } from "../../Actions/userActions";
+import { useDispatch } from "react-redux";
 import Nav from "../../Home/components/Nav";
+import spinner from "../../assests/spinner.gif";
 import Footer from "../../Home/components/Footer";
 
 import "./RegisterForm.css";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [registerError, setRegisterError] = useState();
+  const [loader, setLoader] = useState(false);
 
   const {
     register,
@@ -26,12 +31,16 @@ const RegisterForm = () => {
     e.preventDefault();
     try {
       if (data) {
+        setLoader(true);
         let response = await RegisterUser(data);
         if (response) {
+          dispatch(register_user(response));
+          setLoader(false);
           navigate("/login");
         }
       }
     } catch (err) {
+      setLoader(false);
       if (err.response) {
         setRegisterError(err.response.data.message);
       } else {
@@ -253,15 +262,22 @@ const RegisterForm = () => {
             >
               {registerError ? registerError : null}
             </div>
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="registerBtn  shadow-md mt-2  
+
+            {loader ? (
+              <div className="flex justify-center">
+                <img className="w-16" src={spinner} alt="spinner" />
+              </div>
+            ) : (
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="registerBtn  shadow-md mt-2  
          text-lg   md:text-xl md:mt-4  lg:text-xl"
-              >
-                Register
-              </button>
-            </div>
+                >
+                  Register
+                </button>
+              </div>
+            )}
 
             <div className="goToLoginLinkBlock text-center   mt-4 text-xs lg:text-sm md:text-sm ">
               <div>Already registered? </div>
