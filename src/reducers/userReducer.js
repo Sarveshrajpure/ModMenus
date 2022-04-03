@@ -14,7 +14,10 @@ let userDefault = {
   },
   auth: null,
 };
-const userReducer = (state = { loginInfo: userDefault }, action) => {
+const userReducer = (
+  state = { loginInfo: userDefault, user_verification: userDefault },
+  action
+) => {
   switch (action.type) {
     case LOGIN_USER:
       return {
@@ -25,19 +28,19 @@ const userReducer = (state = { loginInfo: userDefault }, action) => {
     case VERIFY_USER:
       return {
         ...state,
-        loginInfo: { ...state.data, ...action.payload.data },
+        user_verification: { ...state.data, ...action.payload },
         auth: action.payload.auth,
       };
     case REGISTER_USER:
       return {
         ...state,
-        user_verification: { ...state.data, ...action.payload.data },
-        auth: action.payload.auth,
+        user_verification: { ...state.data, ...action.payload },
+        auth: action.payload,
       };
     case SIGNOUT_USER:
       return {
         ...state,
-        user_verification: { ...userDefault.data },
+        user_verification: { ...userDefault },
         auth: false,
       };
 

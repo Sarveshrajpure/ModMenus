@@ -26,7 +26,7 @@ const DashboardLayout = (props) => {
   const getLinks = (links) =>
     links.map((item, i) => (
       <div
-        className={`dashboardLayoutlink ${menu} py-2 px-2  lg:py-4`}
+        className={`dashboardLayoutlink ${menu} py-2 px-8  lg:py-4 w-full`}
         key={i}
         onClick={() => {
           props.setChoice(links.name[i]);
@@ -50,8 +50,10 @@ const DashboardLayout = (props) => {
   return (
     <div className="dashboardLayoutWrapper">
       <Nav isHomePage={false} />
-      <div className="dashboardLayoutBlock   ">
-        <div className={`dashboardLayoutLeftNavWrapper ${menu} lg:py-4`}>
+      <div className="dashboardLayoutBlock  lg:flex   ">
+        <div
+          className={`dashboardLayoutLeftNavWrapper ${menu} lg:py-4 lg:w-1/5`}
+        >
           <div className="dashBoardTitle flex justify-between align-middle  px-10 py-5 ">
             <h2 className=" font-bold text-xl ">Business DashBoard</h2>
             {/* <img
@@ -69,15 +71,15 @@ const DashboardLayout = (props) => {
             </div>
           </div>
           <div
-            className={`dashboardLayoutLeftNavLinks ${menu} ${open}  lg:block  lg:pl-10   `}
+            className={`dashboardLayoutLeftNavLinks ${menu} ${open}  lg:block  lg:pl-10 absolute w-full  z-10 lg:static  `}
           >
             {getLinks(links)}
           </div>
         </div>
 
-        <div className="dashboardLayoutRightWrapper">
+        <div className="dashboardLayoutRightWrapper lg:w-4/5 py-10 px-2">
           <div className="dashboardLayoutRightTitle">
-            <h1>{props.Title} aabbcc</h1>
+            <h1 className="text-2xl">{props.Title}</h1>
           </div>
           <div className="dashboardLayoutRightContentContainer">
             {props.children}

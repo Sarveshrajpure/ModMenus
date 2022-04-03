@@ -8,7 +8,6 @@
 }
 
 .dashboardLayoutlink {
-  width: 10%;
   border-bottom: 1px dotted black;
 }
 
@@ -42,3 +41,10 @@
 .dashBoardTitle {
   background-color: #a7d5ca;
 }
+
+
+/* .dashboardLayoutLeftNavLinks {
+  position: absolute;
+  width:100vw;
+  z-index:2;
+} */
