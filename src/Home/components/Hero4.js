@@ -16,7 +16,7 @@ const Hero4 = () => {
           <div
             className="hero4CardBlock py-2 lg:w-80  cursor-pointer mt-10"
             onClick={() => {
-              window.open("https://offdutyninjas.site/menu/wKdQqA");
+              window.open("https://offdutyninjas.site/menu/2xGkaz");
             }}
           >
             <div className="hero2CardIcon flex justify-center">
