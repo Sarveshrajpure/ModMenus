@@ -81,8 +81,7 @@ const CreateMenu = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="LoginTitle text-center  font-extrabold pb-6">
-              Let's create
-              <span className="text-orange-600"> your digital menu</span>
+              Create a menu card category
               <p className="text-lg py-2">Step 1</p>
             </div>
             <div className="mb-6">
