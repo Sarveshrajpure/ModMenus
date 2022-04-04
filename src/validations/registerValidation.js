@@ -9,14 +9,17 @@ const strongPasswordRegex =
 export const registerSchema = yup.object().shape({
   firstname: yup
     .string()
+    .min(3)
     .max(15, "Must be 15 characters or less")
     .required("Required"),
   lastname: yup
     .string()
+    .min(3)
     .max(20, "Must be 20 characters or less")
     .required("Required"),
   businessname: yup
     .string()
+    .min(3)
     .max(25, "Must be 25 characters or less")
     .required("Required"),
   email: yup
