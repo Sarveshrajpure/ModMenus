@@ -26,16 +26,14 @@ const CreateMenu = () => {
         let sendData = {
           menuId: menu ? menu._id : null,
         };
-        setLoader(true);
+
         const response = await FetchCategory(sendData);
         if (response) {
           console.log(response);
           setCategories({ data: response });
           navigate("/dashboard/catergories");
-          setLoader(false);
         } else {
           setCategories("");
-          setLoader(false);
         }
       } catch (err) {
         console.log(err);
@@ -57,6 +55,7 @@ const CreateMenu = () => {
 
     try {
       if (data) {
+        setLoader(true);
         console.log(data);
         let sendData = {
           name: data.name,
@@ -68,9 +67,11 @@ const CreateMenu = () => {
         let response = await CreateCategory(sendData);
         if (response) {
           console.log(response);
+          setLoader(false);
         }
       }
     } catch (err) {
+      setLoader(false);
       if (err.response) {
         setCategoryError(err.response.data.message);
       } else {
