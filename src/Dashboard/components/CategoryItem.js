@@ -8,7 +8,6 @@ import { FetchCategory } from "../menuActions";
 import { CreateFoodItem, FetchFoodItem } from "../menuActions";
 import Item from "./Item";
 import spinner from "../../assests/spinner.gif";
-
 import "./CategoryItem.css";
 
 const CategoryItem = () => {
@@ -31,15 +30,18 @@ const CategoryItem = () => {
         let sendData = {
           menuId: menu ? menu._id : null,
         };
+        setLoader(true);
         const response = await FetchCategory(sendData);
         if (response) {
           console.log(response);
+          setLoader(false);
           setCategories({ data: response });
         } else {
           setCategories("");
         }
       } catch (err) {
         console.log(err);
+        setLoader(false);
       }
     })();
   }, [menu]);

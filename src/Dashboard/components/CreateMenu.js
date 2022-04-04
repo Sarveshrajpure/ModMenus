@@ -6,12 +6,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { categorySchema } from "../../validations/menuValidation";
 import Category from "./Category";
 import { CreateCategory, FetchCategory } from "../menuActions";
+import spinner from "../../assests/spinner.gif";
 import DashboardLayout from "../../Hoc/DashboardLayout";
 import "./CreateMenu.css";
 
 const CreateMenu = () => {
   const [categories, setCategories] = useState();
   const [categoryError, setCategoryError] = useState();
+  const [loader, setLoader] = useState(false);
 
   const menu = useSelector((state) =>
     state.User.loginInfo.user.firstname ? state.User.loginInfo.menuInfo : null
@@ -23,12 +25,15 @@ const CreateMenu = () => {
         let sendData = {
           menuId: menu ? menu._id : null,
         };
+        setLoader(true);
         const response = await FetchCategory(sendData);
         if (response) {
           console.log(response);
           setCategories({ data: response });
+          setLoader(false);
         } else {
           setCategories("");
+          setLoader(false);
         }
       } catch (err) {
         console.log(err);
@@ -151,7 +156,11 @@ const CreateMenu = () => {
             >
               {categoryError ? categoryError : null}
             </div>
-
+            {loader ? (
+              <div className="flex justify-center">
+                <img className="w-16" src={spinner} alt="spinner" />
+              </div>
+            ) : (
             <div className="flex justify-center">
               <button
                 type="submit"
@@ -160,7 +169,7 @@ const CreateMenu = () => {
               >
                 Create Category
               </button>
-            </div>
+            </div>)}
           </form>{" "}
           <div className="categoryContainer flex flex-wrap px-10  mb-4 ">
             {categories

@@ -7,12 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../validations/loginValidations";
+import spinner from "../../assests/spinner.gif";
 import Nav from "../../Home/components/Nav";
 import Footer from "../../Home/components/Footer";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loader, setLoader] = useState(false);
   const [loginError, setLoginError] = useState();
 
   const {
@@ -30,13 +32,15 @@ const LoginForm = () => {
     try {
       if (data) {
         let response = await LoginUser(data);
-
+        setLoader(true);
         if (response) {
           dispatch(login_user(response));
+          setLoader(false);
           navigate("/dashboard");
         }
       }
     } catch (err) {
+      setLoader(false);
       if (err.response) {
         setLoginError(err.response.data.message);
       } else {
@@ -115,6 +119,12 @@ const LoginForm = () => {
             >
               {loginError ? loginError : null}
             </div>
+
+            {loader ? (
+                  <div className="flex justify-center mt-1">
+                    <img className="w-12" src={spinner} alt="spinner" />
+                  </div>
+                ) : (
             <div className="flex justify-center">
               <button
                 type="submit"
@@ -123,7 +133,7 @@ const LoginForm = () => {
               >
                 Login
               </button>
-            </div>
+            </div>)}
           </form>
           <div className="redirectToRegister  text-center mt-4 text-xs lg:text-sm md:text-sm">
             Don't have a account?

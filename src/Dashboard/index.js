@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import DashboardLayout from "../Hoc/DashboardLayout";
 import { useSelector } from "react-redux";
+import spinner from "../assests/spinner.gif";
 import { getMenu } from "./menuActions";
 
 const Dashboard = () => {
   const [option, setOption] = useState();
   const [qr, setQr] = useState("");
+  const [loader, setLoader] = useState(false);
   const menu = useSelector((state) =>
     state.User.loginInfo.user.firstname ? state.User.loginInfo.menuInfo : null
   );
@@ -14,16 +16,19 @@ const Dashboard = () => {
     async function getQr() {
       try {
         if (menu.menuReference) {
+          setLoader(true);
           let response = await getMenu(menu.menuReference);
           console.log(response.data[0].menuData.qrLink);
           setQr(response.data[0].menuData.qrLink);
+          setLoader(false);
         }
       } catch (error) {
+        setLoader(false);
         console.log(error);
       }
     }
     getQr();
-  }, []);
+  }, [menu.menuReference]);
 
   const user = useSelector((state) =>
     state.User.user_verification.user ? state.User.user_verification.user : null
@@ -46,9 +51,15 @@ const Dashboard = () => {
         <p className="flex justify-center text-xl font-extrabold mt-20">
           Your Qr for viewing menu card
         </p>
-        <div className="flex justify-center">
-          <img src={qr} alt="qr code" />
-        </div>
+        {loader ? (
+          <div className="flex justify-center">
+            <img className="w-16" src={spinner} alt="spinner" />
+          </div>
+        ) : qr ? (
+          <div className="flex justify-center">
+            <img src={qr} alt="qr code" />
+          </div>
+        ) : null}
       </DashboardLayout>
     </div>
   );
