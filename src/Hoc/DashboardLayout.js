@@ -21,10 +21,6 @@ export const links = [
     name: "Category Items",
     linkTo: "/dashboard/catergories/items",
   },
-  {
-    name: "Customers",
-    linkTo: "/dashboard/customers",
-  },
 ];
 
 const DashboardLayout = (props) => {

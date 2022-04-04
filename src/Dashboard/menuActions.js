@@ -48,3 +48,7 @@ export const FetchFoodItem = async (values) => {
   );
   return foodItem.data;
 };
+export const getMenu = async (value) => {
+  let menuData = await axiosInstance.get(`/menucard/getmenu/${value}`);
+  return menuData;
+};
