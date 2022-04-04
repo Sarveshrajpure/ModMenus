@@ -6,6 +6,7 @@ import { ItemSchema } from "../../validations/menuValidation";
 import { useSelector } from "react-redux";
 import { FetchCategory } from "../menuActions";
 import { CreateFoodItem, FetchFoodItem } from "../menuActions";
+import { useNavigate } from "react-router-dom";
 import Item from "./Item";
 import spinner from "../../assests/spinner.gif";
 import "./CategoryItem.css";
@@ -17,6 +18,7 @@ const CategoryItem = () => {
   const [foodItems, setFoodItems] = useState();
   const [fileInput, setFileInput] = useState("");
   const [selectedFile, setSetlectedFile] = useState("");
+  const navigate = useNavigate();
   const [preview, setPreview] = useState("");
   const [loader, setLoader] = useState(false);
 
@@ -30,18 +32,17 @@ const CategoryItem = () => {
         let sendData = {
           menuId: menu ? menu._id : null,
         };
-        setLoader(true);
+
         const response = await FetchCategory(sendData);
         if (response) {
           console.log(response);
-          setLoader(false);
+
           setCategories({ data: response });
         } else {
           setCategories("");
         }
       } catch (err) {
         console.log(err);
-        setLoader(false);
       }
     })();
   }, [menu]);
@@ -92,6 +93,7 @@ const CategoryItem = () => {
       console.log(preview);
       if (data && category) {
         setCategoryError("");
+        setLoader(true);
         let sendData = {
           name: data.name,
           description: data.description,
@@ -100,12 +102,14 @@ const CategoryItem = () => {
           image: preview,
         };
         let response = await CreateFoodItem(sendData);
-        if (response) {
-        }
+
+        setLoader(false);
+        navigate("/dashboard/catergories/items");
       } else {
         setCategoryError("Select Catergory first");
       }
     } catch (err) {
+      setLoader(false);
       if (err.response) {
         setCategoryError(err.response.data.message);
       } else {
@@ -247,7 +251,11 @@ const CategoryItem = () => {
                   />
                 </div>
                 <div className="flex justify-center mb-8">
-                  {preview ? <img src={preview} alt="ImgPreview" /> : ""}
+                  {preview ? (
+                    <img className="w-2/5" src={preview} alt="ImgPreview" />
+                  ) : (
+                    ""
+                  )}
                 </div>
                 <div
                   className="invalid-feedback text-center text-red-500 text-xs px-2 py-2 pt-1 "

@@ -14,6 +14,7 @@ const CreateMenu = () => {
   const [categories, setCategories] = useState();
   const [categoryError, setCategoryError] = useState();
   const [loader, setLoader] = useState(false);
+  const navigate = useNavigate();
 
   const menu = useSelector((state) =>
     state.User.loginInfo.user.firstname ? state.User.loginInfo.menuInfo : null
@@ -30,6 +31,7 @@ const CreateMenu = () => {
         if (response) {
           console.log(response);
           setCategories({ data: response });
+          navigate("/dashboard/catergories");
           setLoader(false);
         } else {
           setCategories("");
@@ -161,15 +163,16 @@ const CreateMenu = () => {
                 <img className="w-16" src={spinner} alt="spinner" />
               </div>
             ) : (
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="createBtn   shadow-md mt-2  
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="createBtn   shadow-md mt-2  
            text-lg   md:text-xl md:mt-4  lg:text-xl"
-              >
-                Create Category
-              </button>
-            </div>)}
+                >
+                  Create Category
+                </button>
+              </div>
+            )}
           </form>{" "}
           <div className="categoryContainer flex flex-wrap px-10  mb-4 ">
             {categories
