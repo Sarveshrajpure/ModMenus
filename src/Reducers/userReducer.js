@@ -5,7 +5,7 @@ import {
   SIGNOUT_USER,
 } from "../Actions/types";
 let userDefault = {
-  data: {
+  user: {
     firstName: "",
     lastName: "",
     email: "",
@@ -35,11 +35,11 @@ const userReducer = (
       return {
         ...state,
         user_verification: { ...state.data, ...action.payload },
-        auth: action.payload,
       };
     case SIGNOUT_USER:
       return {
         ...state,
+        loginInfo: { ...userDefault },
         user_verification: { ...userDefault },
         auth: false,
       };
