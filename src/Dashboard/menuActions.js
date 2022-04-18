@@ -29,6 +29,13 @@ export const FetchCategory = async (values) => {
   return Categories.data;
 };
 
+export const FetchCategoryById = async (value) => {
+  const Category = await axiosInstance.get(
+    `/menucard/getcategorybyid/${value}`
+  );
+  return Category.data;
+};
+
 export const CreateFoodItem = async (values) => {
   console.log(values);
 

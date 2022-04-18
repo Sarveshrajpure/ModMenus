@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import DashboardLayout from "../../Hoc/DashboardLayout";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ItemSchema } from "../../validations/menuValidation";
@@ -104,7 +103,7 @@ const CategoryItem = () => {
         let response = await CreateFoodItem(sendData);
 
         setLoader(false);
-        navigate("/dashboard/catergories/items");
+        navigate("/dashboard/createcategoryitem");
       } else {
         setCategoryError("Select Catergory first");
       }
@@ -119,16 +118,16 @@ const CategoryItem = () => {
   };
 
   return (
-    <DashboardLayout>
+    <>
       {categories ? (
         <div>
-          <div className="AddFoodItemTitle text-xl text-center  font-extrabold pb-6">
-            Select a category and food items
+          <div className="AddFoodItemTitle  text-center text-2xl font-semibold pb-6">
+            Create a Food Item
           </div>
           <div className="dropdowCategoryWrapper text-sm flex pl-8 pb-5">
             <div className="text-lg px-2">Category: </div>
             <select
-              className="dropdownCategory text-lg px-2"
+              className="dropdownCategory text-lg p-1 ml-2"
               value={category}
               onChange={(e) => {
                 setCategory(e.target.value);
@@ -162,9 +161,9 @@ const CategoryItem = () => {
                   </label>
                   <input
                     className=" appearance-none border 
-            rounded w-full py-2 px-3 text-gray-700 
-            leading-tight focus:outline-none
-             focus:shadow-outline"
+          rounded w-full py-2 px-3 text-gray-700 
+          leading-tight focus:outline-none
+           focus:shadow-outline"
                     id="name"
                     type="text"
                     placeholder="Enter Food Item Name"
@@ -189,9 +188,9 @@ const CategoryItem = () => {
                   </label>
                   <input
                     className=" appearance-none border 
-            rounded w-full py-2 px-3 text-gray-700 
-            leading-tight focus:outline-none
-             focus:shadow-outline"
+          rounded w-full py-2 px-3 text-gray-700 
+          leading-tight focus:outline-none
+           focus:shadow-outline"
                     id="description"
                     type="text"
                     placeholder="Enter dish description"
@@ -216,9 +215,9 @@ const CategoryItem = () => {
                   </label>
                   <input
                     className=" appearance-none border 
-            rounded w-full py-2 px-3 text-gray-700 
-            leading-tight focus:outline-none
-             focus:shadow-outline"
+          rounded w-full py-2 px-3 text-gray-700 
+          leading-tight focus:outline-none
+           focus:shadow-outline"
                     id="price"
                     type="text"
                     placeholder="Enter price"
@@ -272,7 +271,7 @@ const CategoryItem = () => {
                     <button
                       type="submit"
                       className="createBtn   shadow-md  
-           text-lg   md:text-xl md:mt-4  lg:text-xl"
+         text-lg   md:text-xl md:mt-4  lg:text-xl"
                     >
                       Create Item
                     </button>
@@ -292,7 +291,7 @@ const CategoryItem = () => {
       ) : (
         <div> Please Create Catergories first</div>
       )}
-    </DashboardLayout>
+    </>
   );
 };
 
