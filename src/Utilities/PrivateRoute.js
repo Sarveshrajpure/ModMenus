@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { verify_user } from "../Actions/userActions";
+import { verify_user, login_user } from "../Actions/userActions";
 import { userIsAuth } from "../Login/loginAction";
 
 const PrivateRoute = () => {
@@ -22,6 +22,7 @@ const PrivateRoute = () => {
         } else {
           console.log("cookie not found");
           dispatch(verify_user({ user: null, auth: null }));
+          dispatch(login_user(null));
           setState(isUserLogged ? "loggedin" : "redirect");
         }
       } catch {

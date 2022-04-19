@@ -8,7 +8,7 @@ import "./Hero1.css";
 const Hero1 = () => {
   const navigate = useNavigate();
   const user = useSelector((state) =>
-    state.User.user_verification.user.firstname
+    state.User.user_verification.user.firstName
       ? state.User.user_verification.user
       : null
   );

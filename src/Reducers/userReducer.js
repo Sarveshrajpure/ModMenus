@@ -6,11 +6,11 @@ import {
 } from "../Actions/types";
 let userDefault = {
   user: {
-    firstName: "",
-    lastName: "",
-    email: "",
-    buinessname: "",
-    phone: "",
+    firstName: null,
+    lastName: null,
+    email: null,
+    buinessname: null,
+    phone: null,
   },
   auth: null,
 };
