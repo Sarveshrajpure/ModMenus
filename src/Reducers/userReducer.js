@@ -6,8 +6,8 @@ import {
 } from "../Actions/types";
 let userDefault = {
   user: {
-    firstName: null,
-    lastName: null,
+    firstname: null,
+    lastname: null,
     email: null,
     buinessname: null,
     phone: null,

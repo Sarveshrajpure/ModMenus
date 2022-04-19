@@ -8,7 +8,7 @@ const Nav = (isHomePage) => {
   const navigate = useNavigate();
 
   const user = useSelector((state) =>
-    state.User.user_verification.user.firstName
+    state.User.user_verification.user.firstname
       ? state.User.user_verification.user
       : ""
   );
