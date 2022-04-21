@@ -3,10 +3,17 @@ import "./Item.css";
 
 const Item = ({ info }) => {
   return (
-    <div className="itemWrapper w-5/6 lg:w-1/4 my-2 mx-2  rounded ">
-      <div className="itemDetailsBlock text-center py-2 ">
-        <div className="nameDetail text-xl">Name: {info.name}</div>
-        <div className="timeDetail text-sm">Time Slot: {info.description}</div>
+    <div className="itemWrapper w-10/12 lg:w-full my-2 mx-2 lg:mx-0 rounded ">
+      <div className="itemDetailsBlock  py-2  ">
+        <div className="nameDetail text-xl text-center">
+          Food Item Name: {info.name}
+        </div>
+        <div className="decriptionDetail text-xs py-1 px-2 ">
+          Description: {info.description}
+        </div>
+        <div className="decriptionDetail text-sm py-1 px-2">
+          Price: ₹ {info.price}
+        </div>
       </div>
     </div>
   );

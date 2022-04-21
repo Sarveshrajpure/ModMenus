@@ -7,7 +7,7 @@ import { categorySchema } from "../../validations/menuValidation";
 import Category from "./Category";
 import { CreateCategory, FetchCategory } from "../menuActions";
 import spinner from "../../assests/spinner.gif";
-import "./CreateMenu.css";
+import "./CreateCategory.css";
 
 const CreateMenu = () => {
   const [categories, setCategories] = useState();
@@ -80,10 +80,10 @@ const CreateMenu = () => {
   };
 
   return (
-    <div className="createMenuFormWrapper">
-      <div className="loginFormBlock w-full lg:w-4/6  ">
+    <div className="createMenuFormWrapper ">
+      <div className="loginFormBlock w-full lg:flex lg:justify-around ">
         <form
-          className="loginForm  px-10 pb-8 mb-4"
+          className="loginForm lg:w-8/12 px-10 pb-8 mb-4"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="createMenuTitle text-center text-2xl font-semibold  pb-6">
@@ -172,7 +172,7 @@ const CreateMenu = () => {
             </div>
           )}
         </form>{" "}
-        <div className="categoryContainer flex flex-wrap px-10  mb-4 ">
+        <div className="categoryContainer flex flex-wrap lg:block lg:w-4/12  lg:overflow-y-auto lg:px-2 px-10  mb-4 ">
           {categories
             ? categories.data.map((item) => <Category info={item} />)
             : null}

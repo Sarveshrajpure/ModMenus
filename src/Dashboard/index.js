@@ -6,6 +6,7 @@ import Nav from "../Home/components/Nav";
 import { userSignOut } from "../Login/loginAction";
 import { useDispatch } from "react-redux";
 import { signout_user } from "../Actions/userActions";
+import "./dashboard.css";
 
 const Dashboard = () => {
   const [qr, setQr] = useState("");
@@ -39,7 +40,9 @@ const Dashboard = () => {
   }, [menu.menuReference]);
 
   const user = useSelector((state) =>
-    state.User.user_verification.user ? state.User.user_verification.user : null
+    state.User.user_verification.user.firstname
+      ? state.User.user_verification.user
+      : null
   );
 
   function capitalizeFirstLetter(string) {
@@ -87,13 +90,15 @@ const Dashboard = () => {
           className={`dashboardLayoutLeftNavWrapper ${menu} lg:py-4 lg:w-1/5`}
         >
           <div
-            className={`dashboardLayoutLeftNavLinks   lg:block  absolute w-full  z-10 lg:static  `}
+            className={`dashboardLayoutLeftNavLinks ${menu} ${open}  lg:block absolute w-full z-10 lg:static   `}
           >
             <Link to="/dashboard">
               <div
                 className="py-2 px-10 lg:py-2  border-dashed border-b-2 cursor-pointer  "
                 onClick={() => {
                   setNavSelection("Dashboard");
+                  setOpen("hidden");
+                  setMenu("close");
                 }}
               >
                 <div
@@ -111,6 +116,8 @@ const Dashboard = () => {
                 className="py-2 px-10 lg:py-2 border-dashed border-b-2 cursor-pointer"
                 onClick={() => {
                   setNavSelection("AddMenuCategories");
+                  setOpen("hidden");
+                  setMenu("close");
                 }}
               >
                 <div
@@ -129,6 +136,8 @@ const Dashboard = () => {
                 className="py-2 px-10 lg:py-2 border-dashed  border-b-2 cursor-pointer"
                 onClick={() => {
                   setNavSelection("AddMenuFoodItems");
+                  setOpen("hidden");
+                  setMenu("close");
                 }}
               >
                 <div
@@ -147,6 +156,8 @@ const Dashboard = () => {
                 className="py-2 px-10 lg:py-2 border-dashed border-b-2 cursor-pointer"
                 onClick={() => {
                   setNavSelection("EditCategories");
+                  setOpen("hidden");
+                  setMenu("close");
                 }}
               >
                 <div
@@ -165,6 +176,8 @@ const Dashboard = () => {
                 className="py-2 px-10 lg:py-2 border-dashed border-b-2 cursor-pointer"
                 onClick={() => {
                   setNavSelection("EditFoodItems");
+                  setOpen("hidden");
+                  setMenu("close");
                 }}
               >
                 <div
@@ -183,6 +196,8 @@ const Dashboard = () => {
               className="y-2 px-10 lg:py-2 border-dashed border-b-2 cursor-pointer"
               onClick={() => {
                 setNavSelection("ViewCustomerData");
+                setOpen("hidden");
+                setMenu("close");
               }}
             >
               <Link to="viewcustomerdata">
@@ -203,6 +218,8 @@ const Dashboard = () => {
               onClick={() => {
                 dispatch(signout_user());
                 logoutUser();
+                setOpen("hidden");
+                setMenu("close");
               }}
             >
               Logout
@@ -210,7 +227,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="dashboardLayoutRightWrapper rounded lg:w-4/5 bg-gray-100 mt-2 ml-8 mr-5 mb-2 p-2">
+        <div className="dashboardLayoutRightWrapper rounded  lg:w-4/5 bg-gray-100 mt-2 ml-8 mr-5 mb-2 p-2">
           <div className="dashboardLayoutRightContentContainer">
             <Outlet />
           </div>

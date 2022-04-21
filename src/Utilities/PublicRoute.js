@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { verify_user, login_user } from "../Actions/userActions";
 import { userIsAuth } from "../Login/loginAction";
 
-const PrivateRoute = () => {
+const PublicRoute = () => {
   /* Track the state of your app instead. Start with a "loading" state */
   const [state, setState] = useState("loading");
   const dispatch = useDispatch();
@@ -59,7 +59,7 @@ const PrivateRoute = () => {
     return <div>Loading..</div>;
   }
 
-  return state === "loggedin" ? <Outlet /> : <Navigate to="/" />;
+  return <Outlet />;
 };
 
-export default PrivateRoute;
+export default PublicRoute;

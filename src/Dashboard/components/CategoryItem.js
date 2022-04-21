@@ -120,172 +120,172 @@ const CategoryItem = () => {
   return (
     <>
       {categories ? (
-        <div>
-          <div className="AddFoodItemTitle  text-center text-2xl font-semibold pb-6">
-            Create a Food Item
-          </div>
-          <div className="dropdowCategoryWrapper text-sm flex pl-8 pb-5">
-            <div className="text-lg px-2">Category: </div>
-            <select
-              className="dropdownCategory text-lg p-1 ml-2"
-              value={category}
-              onChange={(e) => {
-                setCategory(e.target.value);
-              }}
-            >
-              <option selected disabled>
-                Select a category
-              </option>
-              {categories
-                ? categories.data.map((item) => (
-                    <option key={item._id} value={item._id}>
-                      {item.name}
-                    </option>
-                  ))
-                : null}
-            </select>
-          </div>
-
-          <div className="createCategoryItemFormWrapper">
-            <div className="loginFormBlock w-full lg:w-4/6  ">
-              <form
-                className="loginForm  px-10 pb-8 mb-4"
-                onSubmit={handleSubmit(onSubmit)}
+        <div className="lg:flex">
+          <div className="w-8/12">
+            <div className="AddFoodItemTitle  text-center text-2xl font-semibold pb-6">
+              Create a Food Item
+            </div>
+            <div className="dropdowCategoryWrapper text-sm flex pl-8 pb-5">
+              <div className="text-lg px-2">Category: </div>
+              <select
+                className="dropdownCategory text-lg p-1 ml-2"
+                value={category}
+                onChange={(e) => {
+                  setCategory(e.target.value);
+                }}
               >
-                <div className="mb-6">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    for="name"
-                  >
-                    Food Item Name
-                  </label>
-                  <input
-                    className=" appearance-none border 
+                <option selected disabled>
+                  Select a category
+                </option>
+                {categories
+                  ? categories.data.map((item) => (
+                      <option key={item._id} value={item._id}>
+                        {item.name}
+                      </option>
+                    ))
+                  : null}
+              </select>
+            </div>
+
+            <div className="createCategoryItemFormWrapper">
+              <div className="loginFormBlock w-full   ">
+                <form
+                  className="loginForm px-10 pb-8 mb-4"
+                  onSubmit={handleSubmit(onSubmit)}
+                >
+                  <div className="mb-6">
+                    <label
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                      for="name"
+                    >
+                      Food Item Name
+                    </label>
+                    <input
+                      className=" appearance-none border 
           rounded w-full py-2 px-3 text-gray-700 
           leading-tight focus:outline-none
            focus:shadow-outline"
-                    id="name"
-                    type="text"
-                    placeholder="Enter Food Item Name"
-                    {...register("name")}
-                  />
-                  {
-                    <div
-                      className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
-                      style={errors.name ? { display: "block" } : {}}
-                    >
-                      {errors.name?.message}
-                    </div>
-                  }
-                </div>
+                      id="name"
+                      type="text"
+                      placeholder="Enter Food Item Name"
+                      {...register("name")}
+                    />
+                    {
+                      <div
+                        className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
+                        style={errors.name ? { display: "block" } : {}}
+                      >
+                        {errors.name?.message}
+                      </div>
+                    }
+                  </div>
 
-                <div className="mb-6">
+                  <div className="mb-6">
+                    <label
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                      for="description"
+                    >
+                      Description
+                    </label>
+                    <input
+                      className=" appearance-none border 
+          rounded w-full py-2 px-3 text-gray-700 
+          leading-tight focus:outline-none
+           focus:shadow-outline"
+                      id="description"
+                      type="text"
+                      placeholder="Enter dish description"
+                      {...register("description")}
+                    />
+                    {
+                      <div
+                        className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
+                        style={errors.description ? { display: "block" } : {}}
+                      >
+                        {errors.description?.message}
+                      </div>
+                    }
+                  </div>
+
+                  <div className="mb-6">
+                    <label
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                      for="price"
+                    >
+                      Price
+                    </label>
+                    <input
+                      className=" appearance-none border 
+          rounded w-full py-2 px-3 text-gray-700 
+          leading-tight focus:outline-none
+           focus:shadow-outline"
+                      id="price"
+                      type="text"
+                      placeholder="Enter price"
+                      {...register("price")}
+                    />
+                    {
+                      <div
+                        className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
+                        style={errors.price ? { display: "block" } : {}}
+                      >
+                        {errors.price?.message}
+                      </div>
+                    }
+                  </div>
+
                   <label
                     className="block text-gray-700 text-sm font-bold mb-2"
                     for="description"
                   >
-                    Description
+                    Add an image
                   </label>
-                  <input
-                    className=" appearance-none border 
-          rounded w-full py-2 px-3 text-gray-700 
-          leading-tight focus:outline-none
-           focus:shadow-outline"
-                    id="description"
-                    type="text"
-                    placeholder="Enter dish description"
-                    {...register("description")}
-                  />
-                  {
-                    <div
-                      className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
-                      style={errors.description ? { display: "block" } : {}}
-                    >
-                      {errors.description?.message}
-                    </div>
-                  }
-                </div>
 
-                <div className="mb-6">
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    for="price"
+                  <div className="flex justify-center mb-8">
+                    <input
+                      type="file"
+                      name="image"
+                      onChange={handleFileInputChange}
+                      value={fileInput}
+                      className="form-input"
+                    />
+                  </div>
+                  <div className="flex justify-center mb-8">
+                    {preview ? (
+                      <img className="w-1/5" src={preview} alt="ImgPreview" />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                  <div
+                    className="invalid-feedback text-center text-red-500 text-xs px-2 py-2 pt-1 "
+                    style={categoryError ? { display: "block" } : {}}
                   >
-                    Price
-                  </label>
-                  <input
-                    className=" appearance-none border 
-          rounded w-full py-2 px-3 text-gray-700 
-          leading-tight focus:outline-none
-           focus:shadow-outline"
-                    id="price"
-                    type="text"
-                    placeholder="Enter price"
-                    {...register("price")}
-                  />
-                  {
-                    <div
-                      className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
-                      style={errors.price ? { display: "block" } : {}}
-                    >
-                      {errors.price?.message}
+                    {categoryError ? categoryError : null}
+                  </div>
+                  {loader ? (
+                    <div className="flex justify-center mt-1">
+                      <img className="w-12" src={spinner} alt="spinner" />
                     </div>
-                  }
-                </div>
-
-                <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  for="description"
-                >
-                  Add an image
-                </label>
-
-                <div className="flex justify-center mb-8">
-                  <input
-                    type="file"
-                    name="image"
-                    onChange={handleFileInputChange}
-                    value={fileInput}
-                    className="form-input"
-                  />
-                </div>
-                <div className="flex justify-center mb-8">
-                  {preview ? (
-                    <img className="w-2/5" src={preview} alt="ImgPreview" />
                   ) : (
-                    ""
-                  )}
-                </div>
-                <div
-                  className="invalid-feedback text-center text-red-500 text-xs px-2 py-2 pt-1 "
-                  style={categoryError ? { display: "block" } : {}}
-                >
-                  {categoryError ? categoryError : null}
-                </div>
-                {loader ? (
-                  <div className="flex justify-center mt-1">
-                    <img className="w-12" src={spinner} alt="spinner" />
-                  </div>
-                ) : (
-                  <div className="flex justify-center">
-                    <button
-                      type="submit"
-                      className="createBtn   shadow-md  
+                    <div className="flex justify-center">
+                      <button
+                        type="submit"
+                        className="createBtn   shadow-md  
          text-lg   md:text-xl md:mt-4  lg:text-xl"
-                    >
-                      Create Item
-                    </button>
-                  </div>
-                )}
-              </form>{" "}
-              <div className="categoryContainer flex flex-wrap px-10  mb-4 ">
-                {foodItems
-                  ? foodItems.data.map((item) => (
-                      <Item info={item} key={item} />
-                    ))
-                  : null}
+                      >
+                        Create Item
+                      </button>
+                    </div>
+                  )}
+                </form>
               </div>
             </div>
+          </div>
+          <div className="categoryContainer flex flex-wrap lg:block lg:w-4/12   lg:overflow-y-auto lg:px-0 px-10  mb-4 ">
+            {foodItems
+              ? foodItems.data.map((item) => <Item info={item} key={item} />)
+              : null}
           </div>
         </div>
       ) : (

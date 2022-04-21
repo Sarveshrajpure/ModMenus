@@ -1,0 +1,48 @@
+.dashboardLayoutBlock{
+   
+    min-height:75vh;
+    
+}
+
+.dashboardLayoutRightWrapper{
+    min-height: 60vh;
+}
+
+  
+  .dashboardLayoutLeftNavLinks.open {
+    background-color: #004466;
+    color: #98c1d9;
+  }
+  
+  .dashboardLayoutlink {
+    border-bottom: 1px dotted black;
+  }
+  
+  .dashboardLayoutlink.open {
+    width: auto;
+    border-bottom: none;
+  }
+  
+  .fa-bars {
+    color: #98c1d9;
+    transition: all 200ms ease;
+  }
+  
+  .fa-bars.open {
+    color: #004466;
+  }
+  .logoutBtn{
+    cursor: pointer;
+  }
+  
+  
+  
+  
+  
+  
+  
+  /* .dashboardLayoutLeftNavLinks {
+    position: absolute;
+    width:100vw;
+    z-index:2;
+  } */
