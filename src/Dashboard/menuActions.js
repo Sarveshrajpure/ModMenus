@@ -36,6 +36,14 @@ export const FetchCategoryById = async (value) => {
   return Category.data;
 };
 
+export const UpdateCategory = async (values) => {
+  const updateCategory = await axiosInstance.patch(
+    "/menucard/updatecategory",
+    values,
+    getAuthHeader()
+  );
+  return updateCategory;
+};
 export const CreateFoodItem = async (values) => {
   console.log(values);
 

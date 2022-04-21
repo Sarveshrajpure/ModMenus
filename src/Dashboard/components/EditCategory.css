@@ -1,0 +1,16 @@
+.editCategoryBtn{
+    background-color: #98c1d9;
+    text-align: center;
+    border-radius: 0.5rem;
+    padding: 0.3rem 1rem 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 200ms ease-in;
+}
+.deleteCategoryBtn{
+    background-color: #FC6F58;
+    text-align: center;
+    border-radius: 0.5rem;
+    padding: 0.3rem 1rem 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 200ms ease-in;   
+}
