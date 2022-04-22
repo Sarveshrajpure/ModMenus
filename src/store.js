@@ -11,3 +11,4 @@ export const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(...middlewares))
 );
+export const persistor = persistStore(store);

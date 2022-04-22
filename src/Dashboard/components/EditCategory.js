@@ -25,7 +25,7 @@ const EditCategory = () => {
   const [fetchCategoryLoader, setFetchCategoryLoader] = useState(false);
   const [updateCategoryLoader, setUpdateCategoryLoader] = useState(false);
   const menuInfo = useSelector((state) =>
-    state.User.loginInfo.menuInfo._id ? state.User.loginInfo.menuInfo : ""
+    state.User.loginInfo.menuInfo ? state.User.loginInfo.menuInfo : ""
   );
 
   const notify = (message) =>
