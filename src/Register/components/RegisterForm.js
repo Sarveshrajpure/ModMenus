@@ -68,7 +68,7 @@ const RegisterForm = () => {
               <div className="mb-4 ">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
-                  for="firstname"
+                  htmlFor="firstname"
                 >
                   First Name
                 </label>
@@ -95,7 +95,7 @@ const RegisterForm = () => {
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
-                  for="lastname"
+                  htmlFor="lastname"
                 >
                   Last Name
                 </label>
@@ -123,7 +123,7 @@ const RegisterForm = () => {
             <div className="mb-4 ">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="businessname"
+                htmlFor="businessname"
               >
                 Business Name
               </label>
@@ -150,7 +150,7 @@ const RegisterForm = () => {
             <div className="mb-4 ">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="phone"
+                htmlFor="phone"
               >
                 Contact number
               </label>
@@ -178,7 +178,7 @@ const RegisterForm = () => {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="email"
+                htmlFor="email"
               >
                 Email
               </label>
@@ -205,7 +205,7 @@ const RegisterForm = () => {
             <div className="mb-6">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="password"
+                htmlFor="password"
               >
                 Password
               </label>
@@ -232,7 +232,7 @@ const RegisterForm = () => {
             <div className="mb-6">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="confirmpassword"
+                htmlFor="confirmpassword"
               >
                 Confirm Password
               </label>

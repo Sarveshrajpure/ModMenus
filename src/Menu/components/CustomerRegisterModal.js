@@ -46,7 +46,7 @@ const CustomerRegisterModal = ({ businessInfo, closeModal }) => {
       <div className="customerRegisterModalContent rounded w-full lg:w-3/12 h-max ml-4 mr-4 lg:m-0 ">
         <div className="customerRegisterModalCloseBtn text-right">
           <i
-            class="fa-solid fa-xmark mr-3 mt-3 cursor-pointer"
+            className="fa-solid fa-xmark mr-3 mt-3 cursor-pointer"
             onClick={() => {
               closeModal();
             }}

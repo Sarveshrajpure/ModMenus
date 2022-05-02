@@ -6,10 +6,11 @@ import "./Nav.css";
 
 const Nav = (isHomePage) => {
   const navigate = useNavigate();
-  console.log(isHomePage);
 
   const user = useSelector((state) =>
-    state.User.user_verification.user ? state.User.user_verification.user : ""
+    state.User.user_verification.user.firstname
+      ? state.User.user_verification.user
+      : ""
   );
 
   function capitalizeFirstLetter(string) {

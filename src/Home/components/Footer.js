@@ -38,16 +38,16 @@ const Footer = () => {
         <div className="footerSocialCopyRightWrapper">
           <div className="footerSocialBlock   flex justify-evenly   lg:justify-center md:justify-center py-2 lg:py-4  md:py-4 ">
             <div className="lg:w-20  md:w-20">
-              <i class="fa-brands fa-instagram"></i>
+              <i className="fa-brands fa-instagram"></i>
             </div>
             <div className="lg:w-20  md:w-20">
-              <i class="fa-brands fa-whatsapp"></i>
+              <i className="fa-brands fa-whatsapp"></i>
             </div>
             <div className="lg:w-20  md:w-20">
-              <i class="fa-brands fa-facebook-f"></i>
+              <i className="fa-brands fa-facebook-f"></i>
             </div>
             <div className="lg:w-20  md:w-20">
-              <i class="fa-brands fa-twitter"></i>
+              <i className="fa-brands fa-twitter"></i>
             </div>
           </div>
           <div className="footerCopyRightBlock text-center text-xs">

@@ -58,12 +58,12 @@ const LoginForm = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="LoginTitle text-center  font-extrabold pb-6">
-              <spann className="text-orange-600">Dashboard</spann> Login
+              <span className="text-orange-600">Dashboard</span> Login
             </div>
             <div className="mb-6">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="Email"
+                htmlFor="Email"
               >
                 Email
               </label>
@@ -90,7 +90,7 @@ const LoginForm = () => {
             <div className="mb-10">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                for="password"
+                htmlFor="password"
               >
                 Password
               </label>
@@ -121,19 +121,20 @@ const LoginForm = () => {
             </div>
 
             {loader ? (
-                  <div className="flex justify-center mt-1">
-                    <img className="w-12" src={spinner} alt="spinner" />
-                  </div>
-                ) : (
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="loginBtn   shadow-md mt-2  
+              <div className="flex justify-center mt-1">
+                <img className="w-12" src={spinner} alt="spinner" />
+              </div>
+            ) : (
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  className="loginBtn   shadow-md mt-2  
            text-lg   md:text-xl md:mt-4  lg:text-xl"
-              >
-                Login
-              </button>
-            </div>)}
+                >
+                  Login
+                </button>
+              </div>
+            )}
           </form>
           <div className="redirectToRegister  text-center mt-4 text-xs lg:text-sm md:text-sm">
             Don't have a account?
@@ -147,7 +148,7 @@ const LoginForm = () => {
               Register
             </span>
           </div>
-          <p class="text-center text-gray-500 text-xs mt-4">
+          <p className="text-center text-gray-500 text-xs mt-4">
             &copy;2021 MOD MENUS Corp. All rights reserved.
           </p>
         </div>
