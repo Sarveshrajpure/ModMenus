@@ -58,7 +58,7 @@ const LoginForm = () => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="LoginTitle text-center  font-extrabold pb-6">
-              <spann className="text-orange-600">Dashboard</spann> Login
+              <span className="text-orange-600">Dashboard</span> Login
             </div>
             <div className="mb-6">
               <label
@@ -148,7 +148,7 @@ const LoginForm = () => {
               Register
             </span>
           </div>
-          <p class="text-center text-gray-500 text-xs mt-4">
+          <p className="text-center text-gray-500 text-xs mt-4">
             &copy;2021 MOD MENUS Corp. All rights reserved.
           </p>
         </div>

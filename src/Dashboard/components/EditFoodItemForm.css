@@ -1,0 +1,43 @@
+.removeFoodItemImgBtn{
+    width:50%;
+    background-color: #FC6F58;
+    text-align: center;
+    border-radius: 0.5rem;
+    padding: 0.3rem 1rem 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 200ms ease-in;   
+}
+.clearFoodItemImgBtn{
+    width:50%;
+    background-color: #98c1d9;
+    text-align: center;
+    border-radius: 0.5rem;
+    padding: 0.3rem 1rem 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 200ms ease-in;
+}
+
+.editFoodItemCancelBtn{
+
+    background-color: #FC6F58;
+    text-align: center;
+    border-radius: 0.5rem;
+    padding: 0.3rem 1rem 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 200ms ease-in;   
+}
+.editFoodItemBtn{
+    background-color: #98c1d9;
+    text-align: center;
+    border-radius: 0.5rem;
+    padding: 0.3rem 1rem 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 200ms ease-in;
+}
+
+.foodItemImagePreview{
+ border: 1px solid #ddd; 
+  border-radius: 4px;  
+  padding: 5px; 
+  width: 150px; 
+}

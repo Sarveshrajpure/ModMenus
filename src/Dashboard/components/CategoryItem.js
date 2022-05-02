@@ -9,14 +9,16 @@ import { useNavigate } from "react-router-dom";
 import Item from "./Item";
 import spinner from "../../assests/spinner.gif";
 import "./CategoryItem.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CategoryItem = () => {
   const [category, setCategory] = useState();
   const [categoryError, setCategoryError] = useState();
   const [categories, setCategories] = useState();
   const [foodItems, setFoodItems] = useState();
+  const [foodItemCreated, setFoodItemCreated] = useState(false);
   const [fileInput, setFileInput] = useState("");
-  const [selectedFile, setSetlectedFile] = useState("");
   const navigate = useNavigate();
   const [preview, setPreview] = useState("");
   const [loader, setLoader] = useState(false);
@@ -24,6 +26,17 @@ const CategoryItem = () => {
   const menu = useSelector((state) =>
     state.User.loginInfo.user.firstname ? state.User.loginInfo.menuInfo : null
   );
+
+  const notify = (message) =>
+    toast.success(message, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   useEffect(() => {
     (async function () {
@@ -34,8 +47,6 @@ const CategoryItem = () => {
 
         const response = await FetchCategory(sendData);
         if (response) {
-          console.log(response);
-
           setCategories({ data: response });
         } else {
           setCategories("");
@@ -49,21 +60,23 @@ const CategoryItem = () => {
   useEffect(() => {
     (async function () {
       try {
-        let sendData = {
-          categoryId: category ? category : null,
-        };
-
-        const response = await FetchFoodItem(sendData);
-        if (response) {
-          setFoodItems({ data: response });
-        } else {
-          setFoodItems("");
+        if (category) {
+          setLoader(true);
+          let dataToBeSent = { categoryId: category };
+          const response = await FetchFoodItem(dataToBeSent);
+          if (response) {
+            setLoader(false);
+            setFoodItems({ data: response });
+          } else {
+            setFoodItems("");
+            setLoader(false);
+          }
         }
       } catch (err) {
-        console.log(err);
+        setLoader(false);
       }
     })();
-  }, [category]);
+  }, [category, foodItemCreated]);
 
   const previewFile = (file) => {
     const reader = new FileReader();
@@ -79,6 +92,7 @@ const CategoryItem = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "onChange",
@@ -101,9 +115,11 @@ const CategoryItem = () => {
           image: preview,
         };
         let response = await CreateFoodItem(sendData);
-
         setLoader(false);
-        navigate("/dashboard/createcategoryitem");
+        reset();
+        notify("Food Item added successfully!");
+        setFoodItemCreated((prev) => !prev);
+        setPreview("");
       } else {
         setCategoryError("Select Catergory first");
       }
@@ -116,15 +132,19 @@ const CategoryItem = () => {
       }
     }
   };
+  console.log(category);
 
   return (
     <>
       {categories ? (
         <div className="lg:flex">
           <div className="w-8/12">
-            <div className="AddFoodItemTitle  text-center text-2xl font-semibold pb-6">
+            <div className="AddFoodItemTitle  text-center text-2xl font-semibold pb-2">
               Create a Food Item
             </div>
+            <p className="text-center pb-4">
+              Please select a category to create a food item
+            </p>
             <div className="dropdowCategoryWrapper text-sm flex pl-8 pb-5">
               <div className="text-lg px-2">Category: </div>
               <select
@@ -134,7 +154,7 @@ const CategoryItem = () => {
                   setCategory(e.target.value);
                 }}
               >
-                <option selected disabled>
+                <option disabled selected>
                   Select a category
                 </option>
                 {categories
@@ -148,145 +168,166 @@ const CategoryItem = () => {
             </div>
 
             <div className="createCategoryItemFormWrapper">
-              <div className="loginFormBlock w-full   ">
-                <form
-                  className="loginForm px-10 pb-8 mb-4"
-                  onSubmit={handleSubmit(onSubmit)}
-                >
-                  <div className="mb-6">
-                    <label
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                      for="name"
-                    >
-                      Food Item Name
-                    </label>
-                    <input
-                      className=" appearance-none border 
-          rounded w-full py-2 px-3 text-gray-700 
-          leading-tight focus:outline-none
-           focus:shadow-outline"
-                      id="name"
-                      type="text"
-                      placeholder="Enter Food Item Name"
-                      {...register("name")}
-                    />
-                    {
-                      <div
-                        className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
-                        style={errors.name ? { display: "block" } : {}}
-                      >
-                        {errors.name?.message}
-                      </div>
-                    }
-                  </div>
-
-                  <div className="mb-6">
-                    <label
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                      for="description"
-                    >
-                      Description
-                    </label>
-                    <input
-                      className=" appearance-none border 
-          rounded w-full py-2 px-3 text-gray-700 
-          leading-tight focus:outline-none
-           focus:shadow-outline"
-                      id="description"
-                      type="text"
-                      placeholder="Enter dish description"
-                      {...register("description")}
-                    />
-                    {
-                      <div
-                        className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
-                        style={errors.description ? { display: "block" } : {}}
-                      >
-                        {errors.description?.message}
-                      </div>
-                    }
-                  </div>
-
-                  <div className="mb-6">
-                    <label
-                      className="block text-gray-700 text-sm font-bold mb-2"
-                      for="price"
-                    >
-                      Price
-                    </label>
-                    <input
-                      className=" appearance-none border 
-          rounded w-full py-2 px-3 text-gray-700 
-          leading-tight focus:outline-none
-           focus:shadow-outline"
-                      id="price"
-                      type="text"
-                      placeholder="Enter price"
-                      {...register("price")}
-                    />
-                    {
-                      <div
-                        className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
-                        style={errors.price ? { display: "block" } : {}}
-                      >
-                        {errors.price?.message}
-                      </div>
-                    }
-                  </div>
-
-                  <label
-                    className="block text-gray-700 text-sm font-bold mb-2"
-                    for="description"
+              {category === undefined ? (
+                ""
+              ) : (
+                <div className="loginFormBlock w-full   ">
+                  <form
+                    className="loginForm px-10 pb-8 mb-4"
+                    onSubmit={handleSubmit(onSubmit)}
                   >
-                    Add an image
-                  </label>
+                    <div className="mb-6">
+                      <label
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                        htmlFor="name"
+                      >
+                        Food Item Name
+                      </label>
+                      <input
+                        className=" appearance-none border 
+          rounded w-full py-2 px-3 text-gray-700 
+          leading-tight focus:outline-none
+           focus:shadow-outline"
+                        id="name"
+                        type="text"
+                        placeholder="Enter Food Item Name"
+                        {...register("name")}
+                      />
+                      {
+                        <div
+                          className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
+                          style={errors.name ? { display: "block" } : {}}
+                        >
+                          {errors.name?.message}
+                        </div>
+                      }
+                    </div>
 
-                  <div className="flex justify-center mb-8">
-                    <input
-                      type="file"
-                      name="image"
-                      onChange={handleFileInputChange}
-                      value={fileInput}
-                      className="form-input"
-                    />
-                  </div>
-                  <div className="flex justify-center mb-8">
-                    {preview ? (
-                      <img className="w-1/5" src={preview} alt="ImgPreview" />
+                    <div className="mb-6">
+                      <label
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                        htmlFor="description"
+                      >
+                        Description
+                      </label>
+                      <input
+                        className=" appearance-none border 
+          rounded w-full py-2 px-3 text-gray-700 
+          leading-tight focus:outline-none
+           focus:shadow-outline"
+                        id="description"
+                        type="text"
+                        placeholder="Enter dish description"
+                        {...register("description")}
+                      />
+                      {
+                        <div
+                          className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
+                          style={errors.description ? { display: "block" } : {}}
+                        >
+                          {errors.description?.message}
+                        </div>
+                      }
+                    </div>
+
+                    <div className="mb-6">
+                      <label
+                        className="block text-gray-700 text-sm font-bold mb-2"
+                        htmlFor="price"
+                      >
+                        Price
+                      </label>
+                      <input
+                        className=" appearance-none border 
+          rounded w-full py-2 px-3 text-gray-700 
+          leading-tight focus:outline-none
+           focus:shadow-outline"
+                        id="price"
+                        type="text"
+                        placeholder="Enter price"
+                        {...register("price")}
+                      />
+                      {
+                        <div
+                          className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
+                          style={errors.price ? { display: "block" } : {}}
+                        >
+                          {errors.price?.message}
+                        </div>
+                      }
+                    </div>
+
+                    <label
+                      className="block text-gray-700 text-sm font-bold mb-2"
+                      htmlFor="description"
+                    >
+                      Add an image
+                    </label>
+
+                    <div className="flex justify-center mb-8">
+                      <input
+                        type="file"
+                        name="image"
+                        onChange={handleFileInputChange}
+                        value={fileInput}
+                        className="form-input"
+                      />
+                    </div>
+                    <div className="flex justify-center mb-8">
+                      {preview ? (
+                        <img
+                          className="  foodItemImagePreview w-1/5"
+                          src={preview}
+                          alt="ImgPreview"
+                        />
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                    <div
+                      className="invalid-feedback text-center text-red-500 text-xs px-2 py-2 pt-1 "
+                      style={categoryError ? { display: "block" } : {}}
+                    >
+                      {categoryError ? categoryError : null}
+                    </div>
+                    {loader ? (
+                      <div className="flex justify-center mt-1">
+                        <img className="w-12" src={spinner} alt="spinner" />
+                      </div>
                     ) : (
-                      ""
-                    )}
-                  </div>
-                  <div
-                    className="invalid-feedback text-center text-red-500 text-xs px-2 py-2 pt-1 "
-                    style={categoryError ? { display: "block" } : {}}
-                  >
-                    {categoryError ? categoryError : null}
-                  </div>
-                  {loader ? (
-                    <div className="flex justify-center mt-1">
-                      <img className="w-12" src={spinner} alt="spinner" />
-                    </div>
-                  ) : (
-                    <div className="flex justify-center">
-                      <button
-                        type="submit"
-                        className="createBtn   shadow-md  
+                      <div className="flex justify-center">
+                        <button
+                          type="submit"
+                          className="createBtn   shadow-md  
          text-lg   md:text-xl md:mt-4  lg:text-xl"
-                      >
-                        Create Item
-                      </button>
-                    </div>
-                  )}
-                </form>
-              </div>
+                        >
+                          Create Item
+                        </button>
+                      </div>
+                    )}
+                  </form>
+                </div>
+              )}
             </div>
           </div>
-          <div className="categoryContainer flex flex-wrap lg:block lg:w-4/12   lg:overflow-y-auto lg:px-0 px-10  mb-4 ">
-            {foodItems
-              ? foodItems.data.map((item) => <Item info={item} key={item} />)
-              : null}
+
+          <div className="categoryContainer flex flex-wrap lg:block lg:w-4/12   lg:overflow-y-auto lg:px-0 px-10 mt-6  mb-4 ">
+            {loader ? (
+              <div className="flex justify-center">
+                <img className="w-16" src={spinner} alt="spinner" />
+              </div>
+            ) : (
+              <>
+                {foodItems
+                  ? foodItems.data.map((item, index) => (
+                      <Item info={item} key={index} />
+                    ))
+                  : null}
+              </>
+            )}
           </div>
+
+          <ToastContainer />
         </div>
       ) : (
         <div> Please Create Catergories first</div>

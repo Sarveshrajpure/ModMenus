@@ -44,6 +44,16 @@ export const UpdateCategory = async (values) => {
   );
   return updateCategory;
 };
+
+export const DeleteCategory = async (values) => {
+  console.log(getAuthHeader);
+  const deleteCategory = await axiosInstance.post(
+    "/menucard/deletecategory",
+    values,
+    getAuthHeader()
+  );
+  return deleteCategory;
+};
 export const CreateFoodItem = async (values) => {
   console.log(values);
 
@@ -63,6 +73,25 @@ export const FetchFoodItem = async (values) => {
   );
   return foodItem.data;
 };
+
+export const UpdateFoodItem = async (values) => {
+  const updateFoodItem = await axiosInstance.post(
+    "/menucard/updatefooditem",
+    values,
+    getAuthHeader()
+  );
+  return updateFoodItem;
+};
+
+export const DeleteFoodItem = async (values) => {
+  const deleteFoodItem = await axiosInstance.post(
+    "/menucard/deletefooditem",
+    values,
+    getAuthHeader()
+  );
+  return deleteFoodItem;
+};
+
 export const getMenu = async (value) => {
   let menuData = await axiosInstance.get(`/menucard/getmenu/${value}`);
   return menuData;

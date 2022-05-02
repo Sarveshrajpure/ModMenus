@@ -6,6 +6,7 @@ import {
   FetchCategory,
   FetchCategoryById,
   UpdateCategory,
+  DeleteCategory,
 } from "../menuActions";
 import { editCategorySchema } from "../../validations/EditCategory";
 import { ToastContainer, toast } from "react-toastify";
@@ -24,6 +25,7 @@ const EditCategory = () => {
   const [loader, setLoader] = useState(false);
   const [fetchCategoryLoader, setFetchCategoryLoader] = useState(false);
   const [updateCategoryLoader, setUpdateCategoryLoader] = useState(false);
+
   const menuInfo = useSelector((state) =>
     state.User.loginInfo.menuInfo ? state.User.loginInfo.menuInfo : ""
   );
@@ -39,27 +41,23 @@ const EditCategory = () => {
       progress: undefined,
     });
 
-  useEffect(
-    () => {
-      async function getCategories() {
-        try {
-          setLoader(true);
-          if (menuInfo._id) {
-            let dataToBeSent = { menuId: menuInfo._id };
-            let response = await FetchCategory(dataToBeSent);
-            setCategories(response);
-            setLoader(false);
-          }
-        } catch (error) {
+  useEffect(() => {
+    async function getCategories() {
+      try {
+        setLoader(true);
+        if (menuInfo._id) {
+          let dataToBeSent = { menuId: menuInfo._id };
+          let response = await FetchCategory(dataToBeSent);
+          setCategories(response);
           setLoader(false);
-          setError(error.message);
         }
+      } catch (error) {
+        setLoader(false);
+        setError(error.message);
       }
-      getCategories();
-    },
-    [menuInfo._id, fetchCategories],
-    fetchCategories
-  );
+    }
+    getCategories();
+  }, [menuInfo._id, fetchCategories]);
 
   useEffect(() => {
     async function getCategoryInfoById() {
@@ -108,7 +106,6 @@ const EditCategory = () => {
           time: formState.time,
           _id: formState._id,
         };
-        console.log(dataToBeValidated);
         let formData = await editCategorySchema
           .validate(dataToBeValidated, {
             abortEarly: false,
@@ -133,10 +130,44 @@ const EditCategory = () => {
         document.getElementById("categorySelect").selectedIndex = 0;
         setFetchCategories((prev) => !prev);
         notify(editCartegory.data.message);
+      } else if (userSelection === "delete") {
+        setUpdateCategoryLoader(true);
+        let dataToBeValidated = {
+          name: formState.name,
+          time: formState.time,
+          _id: formState._id,
+        };
+        let formData = await editCategorySchema
+          .validate(dataToBeValidated, {
+            abortEarly: false,
+          })
+          .catch((err) => {
+            for (let i = 0; i < err.inner.length; i++) {
+              setFormErrors((prev) => ({
+                ...prev,
+                [err.inner[i].path]: err.inner[i].message,
+              }));
+            }
+          });
+
+        let dataToBeSent = { categoryId: formData._id };
+
+        let deleteCategory = await DeleteCategory(dataToBeSent);
+        setUpdateCategoryLoader(false);
+        setSelectedCategoriesId(undefined);
+        document.getElementById("categorySelect").selectedIndex = 0;
+        setFetchCategories((prev) => !prev);
+        notify(deleteCategory.data.message);
       }
     } catch (error) {
-      setUpdateCategoryLoader(false);
-      setError(error.message);
+      console.log(error.response.data.message);
+      if (error.response.status === 405) {
+        setUpdateCategoryLoader(false);
+        setError(error.response.data.message);
+      } else {
+        setUpdateCategoryLoader(false);
+        setError(error.message);
+      }
     }
   };
   return (
@@ -245,15 +276,13 @@ const EditCategory = () => {
                         <div className="flex justify-around pt-6 ">
                           <button
                             value="edit"
-                            className="editCategoryBtn shadow-md mt-2  
-          text-lg md:text-xl md:mt-4 lg:text-xl"
+                            className="editCategoryBtn shadow-md mt-2 text-lg md:text-xl md:mt-4 lg:text-xl"
                           >
                             Submit
                           </button>
                           <button
                             value="delete"
-                            className="deleteCategoryBtn shadow-md mt-2  
-          text-lg md:text-xl md:mt-4 lg:text-xl"
+                            className="deleteCategoryBtn shadow-md mt-2  text-lg md:text-xl md:mt-4 lg:text-xl"
                           >
                             Delete
                           </button>
@@ -261,6 +290,13 @@ const EditCategory = () => {
                       )}
                     </div>
                   </form>
+                )}
+                {error ? (
+                  <div className="text-center mt-2 mb-2 text-red-700">
+                    {error}
+                  </div>
+                ) : (
+                  ""
                 )}
               </div>
             </>

@@ -8,16 +8,30 @@ import Category from "./Category";
 import { CreateCategory, FetchCategory } from "../menuActions";
 import spinner from "../../assests/spinner.gif";
 import "./CreateCategory.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreateMenu = () => {
   const [categories, setCategories] = useState();
   const [categoryError, setCategoryError] = useState();
   const [loader, setLoader] = useState(false);
+  const [categoryCreatedResponse, setCategoryCreatedResponse] = useState(false);
   const navigate = useNavigate();
 
   const menu = useSelector((state) =>
     state.User.loginInfo.user.firstname ? state.User.loginInfo.menuInfo : null
   );
+
+  const notify = (message) =>
+    toast.success(message, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   useEffect(() => {
     (async function () {
@@ -38,11 +52,12 @@ const CreateMenu = () => {
         console.log(err);
       }
     })();
-  }, []);
+  }, [categoryCreatedResponse]);
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "onChange",
@@ -64,10 +79,10 @@ const CreateMenu = () => {
         console.log(sendData);
 
         let response = await CreateCategory(sendData);
-        if (response) {
-          console.log(response);
-          setLoader(false);
-        }
+        setLoader(false);
+        reset();
+        notify("Category created successFully!");
+        setCategoryCreatedResponse((prev) => !prev);
       }
     } catch (err) {
       setLoader(false);
@@ -114,13 +129,6 @@ const CreateMenu = () => {
                 {errors.name?.message}
               </div>
             }
-          </div>
-
-          <div
-            className="invalid-feedback text-center text-red-500 text-xs px-2 py-2 pt-1 "
-            style={categoryError ? { display: "block" } : {}}
-          >
-            {categoryError ? categoryError : null}
           </div>
 
           <div className="mb-6">
@@ -171,13 +179,14 @@ const CreateMenu = () => {
               </button>
             </div>
           )}
-        </form>{" "}
+        </form>
         <div className="categoryContainer flex flex-wrap lg:block lg:w-4/12  lg:overflow-y-auto lg:px-2 px-10  mb-4 ">
           {categories
             ? categories.data.map((item) => <Category info={item} />)
             : null}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
