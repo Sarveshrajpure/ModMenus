@@ -164,12 +164,8 @@ const Cart = () => {
           {orderPlaced.items ? (
             <div>
               <Order order={orderPlaced} />
-              <div>
-                <img
-                  className="transform relative w-64 left-20 "
-                  src={tick}
-                  alt="Success"
-                />
+              <div className="flex justify-center">
+                <img className=" w-64  " src={tick} alt="Success" />
               </div>
               <div className="text-sm text-center font-bold py-4">
                 Sit tight your food is being prepared!
