@@ -6,7 +6,9 @@ import Nav from "../Home/components/Nav";
 import { userSignOut } from "../Login/loginAction";
 import { useDispatch } from "react-redux";
 import { signout_user } from "../Actions/userActions";
+import { fetchOrdersByBusinessId } from "./menuActions";
 import "./dashboard.css";
+import io from "socket.io-client";
 
 const Dashboard = () => {
   const [qr, setQr] = useState("");
@@ -14,12 +16,44 @@ const Dashboard = () => {
   const [navSelection, setNavSelection] = useState("Dashboard");
   const [open, setOpen] = useState("hidden");
   const [menu, setMenu] = useState("close");
+  const [orders, setOrders] = useState([]);
+  const [newOrders, setNewOrders] = useState([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const menu = useSelector((state) =>
-  //   state.User.loginInfo.user.firstname ? state.User.loginInfo.menuInfo : null
-  // );
+  const businessId = useSelector((state) =>
+    state.User.user_verification.user.firstname
+      ? state.User.user_verification.user._id
+      : null
+  );
+
+  useEffect(() => {
+    async function fetchOrders() {
+      try {
+        console.log(businessId);
+        if (businessId) {
+          let dataToBeSent = {
+            businessId: businessId,
+          };
+          let response = await fetchOrdersByBusinessId(dataToBeSent);
+          setOrders(response.data);
+        }
+      } catch (error) {}
+    }
+    fetchOrders();
+  }, []);
+
+  useEffect(() => {
+    const socket = io("localhost:3001/api/socket");
+    socket.on("newOrder", (newOrder) => {
+      console.log(newOrder);
+      if (newOrder.businessId === businessId) {
+        let tempOrder = orders;
+        tempOrder.push(newOrder);
+        setNewOrders(tempOrder);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     async function getQr() {
@@ -71,6 +105,7 @@ const Dashboard = () => {
       console.log(err);
     }
   };
+  
   return (
     <div className="dashboardLayoutWrapper">
       <Nav isHomePage={false} />

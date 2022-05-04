@@ -103,17 +103,19 @@ const CategoryItem = () => {
     e.preventDefault();
 
     try {
-      console.log(preview);
       if (data && category) {
         setCategoryError("");
         setLoader(true);
+
         let sendData = {
           name: data.name,
           description: data.description,
           categoryId: category,
+          menuId: menu._id,
           price: data.price,
           image: preview,
         };
+
         let response = await CreateFoodItem(sendData);
         setLoader(false);
         reset();
