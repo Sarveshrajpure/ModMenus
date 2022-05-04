@@ -21,7 +21,7 @@ const Nav = (isHomePage) => {
 
   const navigateTo = async () => {
     if (user) {
-      navigate("/dashboard");
+      navigate("/dashboard/dashboardhome");
     } else {
       navigate("/login");
     }

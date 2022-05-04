@@ -105,3 +105,12 @@ export const fetchOrdersByBusinessId = async (values) => {
   );
   return orders;
 };
+
+export const updateOrderStatus = async (values) => {
+  const updateOrder = await axiosInstance.post(
+    "/orders/updateorderstatus",
+    values,
+    getAuthHeader()
+  );
+  return updateOrder;
+};

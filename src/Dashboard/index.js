@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { getMenu } from "./menuActions";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import Nav from "../Home/components/Nav";
 import { userSignOut } from "../Login/loginAction";
 import { useDispatch } from "react-redux";
 import { signout_user } from "../Actions/userActions";
-import { fetchOrdersByBusinessId } from "./menuActions";
 import "./dashboard.css";
 import io from "socket.io-client";
 
@@ -16,45 +14,15 @@ const Dashboard = () => {
   const [navSelection, setNavSelection] = useState("Dashboard");
   const [open, setOpen] = useState("hidden");
   const [menu, setMenu] = useState("close");
-  const [orders, setOrders] = useState([]);
-  const [newOrders, setNewOrders] = useState([]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const businessId = useSelector((state) =>
-    state.User.user_verification.user.firstname
-      ? state.User.user_verification.user._id
-      : null
-  );
-
-  useEffect(() => {
-    async function fetchOrders() {
-      try {
-        console.log(businessId);
-        if (businessId) {
-          let dataToBeSent = {
-            businessId: businessId,
-          };
-          let response = await fetchOrdersByBusinessId(dataToBeSent);
-          setOrders(response.data);
-        }
-      } catch (error) {}
-    }
-    fetchOrders();
-  }, []);
-
   useEffect(() => {
     const socket = io("localhost:3001/api/socket");
-    socket.on("newOrder", (newOrder) => {
+    socket.on("newOrder", async (newOrder) => {
       console.log(newOrder);
-      if (newOrder.businessId === businessId) {
-        let tempOrder = orders;
-        tempOrder.push(newOrder);
-        setNewOrders(tempOrder);
-      }
     });
   }, []);
-
   useEffect(() => {
     async function getQr() {
       try {
@@ -72,12 +40,6 @@ const Dashboard = () => {
     }
     getQr();
   }, [menu.menuReference]);
-
-  const user = useSelector((state) =>
-    state.User.user_verification.user.firstname
-      ? state.User.user_verification.user
-      : null
-  );
 
   function capitalizeFirstLetter(string) {
     if (string) {
@@ -127,7 +89,7 @@ const Dashboard = () => {
           <div
             className={`dashboardLayoutLeftNavLinks ${menu} ${open}  lg:block absolute w-full z-10 lg:static   `}
           >
-            <Link to="/dashboard">
+            <Link to="dashboardhome">
               <div
                 className="py-2 px-10 lg:py-2  border-dashed border-b-2 cursor-pointer  "
                 onClick={() => {
