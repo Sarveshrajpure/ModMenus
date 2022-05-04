@@ -1,0 +1,10 @@
+.orderQuantityBlock{
+    color:#004466;
+    position:relative;
+    font-weight: 600;
+    top:-5px;
+    background-color: #a9d6f191;
+    border-radius: 50%;
+    padding: 0rem 0rem 0rem 0rem;
+    width:22px;
+}

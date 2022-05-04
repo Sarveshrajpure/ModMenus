@@ -105,7 +105,7 @@ const Dashboard = () => {
       console.log(err);
     }
   };
-  
+
   return (
     <div className="dashboardLayoutWrapper">
       <Nav isHomePage={false} />
@@ -227,7 +227,7 @@ const Dashboard = () => {
               </div>
             </Link>
 
-            <div
+            {/* <div
               className="y-2 px-10 lg:py-2 border-dashed border-b-2 cursor-pointer"
               onClick={() => {
                 setNavSelection("ViewCustomerData");
@@ -246,7 +246,7 @@ const Dashboard = () => {
                   View customer data
                 </div>
               </Link>
-            </div>
+            </div> */}
 
             <div
               className="py-2 px-12 lg:py-4 border-dashed border-b-2 cursor-pointer"

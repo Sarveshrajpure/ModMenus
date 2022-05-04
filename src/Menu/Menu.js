@@ -4,7 +4,7 @@ import Categories from "./components/Categories";
 import { getMenu } from "./MenuActrions";
 import spinnerGif from "../assests/spinner.gif";
 import CustomerRegisterModal from "./components/CustomerRegisterModal";
-import { getCart } from "./MenuActrions";
+import { getCart, getActiveOrders } from "./MenuActrions";
 import { useSelector } from "react-redux";
 
 const Menu = () => {
@@ -12,6 +12,7 @@ const Menu = () => {
   const [menuData, setMenuData] = useState();
   const [spinner, setSpinner] = useState(false);
   const [custRegisterModal, setCustRegisterModal] = useState(false);
+  const [orderData, setOrderData] = useState([]);
   const [cartData, setCartData] = useState([]);
   const [cartCount, setCount] = useState([]);
   const guest = useSelector((state) =>
@@ -59,6 +60,26 @@ const Menu = () => {
     getCartData();
   }, [guest._id, guest.cart, guestCart.length]);
 
+  useEffect(() => {
+    try {
+      setSpinner(true);
+      const getInfo = async () => {
+        let response = await getActiveOrders({
+          id: guest._id,
+        });
+        if (response.data) {
+          setOrderData(response.data);
+          setSpinner(false);
+        }
+      };
+
+      getInfo();
+    } catch (err) {
+      console.log(err);
+      setSpinner(false);
+    }
+  }, [guest._id]);
+
   return (
     <React.Fragment>
       {spinner ? (
@@ -93,17 +114,31 @@ const Menu = () => {
 
             <div className="goToCartBtn flex pt-2 px-2">
               <div>Hi {guest.name}!</div>
+              <div className="flex justify-between w-28">
+                {orderData ? (
+                  <Link to={"/menus/orders"}>
+                    <div className="flex ">
+                      <div className="text-sm font-semibold">Orders</div>
+                      <div className="orderQuantityBlock text-sm text-center">
+                        {orderData.length}
+                      </div>
+                    </div>
+                  </Link>
+                ) : (
+                  ""
+                )}
 
-              <Link to={"/menus/cart"}>
-                <div className="flex ">
-                  <div>
-                    <i class="fa-solid fa-cart-shopping"></i>
+                <Link to={"/menus/cart"}>
+                  <div className="flex ">
+                    <div>
+                      <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                    <div className="cartQuantityBlock text-sm text-center">
+                      {cartCount}
+                    </div>
                   </div>
-                  <div className="cartQuantityBlock text-sm text-center">
-                    {cartCount}
-                  </div>
-                </div>
-              </Link>
+                </Link>
+              </div>
             </div>
 
             {menuData

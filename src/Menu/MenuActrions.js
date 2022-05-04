@@ -16,7 +16,7 @@ export const addToCart = async (id, cartItems) => {
     id,
     cartItems,
   };
-  
+
   let cart = await axiosInstance.post("/guest/addToCart", values);
   return cart.data;
 };
@@ -29,4 +29,12 @@ export const getCart = async (values) => {
 export const order = async (values) => {
   let order = await axiosInstance.post("/orders/placeOrder", values);
   return order.data;
+};
+
+export const getActiveOrders = async (values) => {
+  let orders = await axiosInstance.get(
+    `/orders/findorderbyguestid/${values.id}`
+  );
+
+  return orders;
 };

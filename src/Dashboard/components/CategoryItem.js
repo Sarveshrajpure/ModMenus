@@ -19,6 +19,7 @@ const CategoryItem = () => {
   const [foodItems, setFoodItems] = useState();
   const [foodItemCreated, setFoodItemCreated] = useState(false);
   const [fileInput, setFileInput] = useState("");
+  const [emptyCategoryMessage, setEmptyCategoryMessage] = useState(undefined);
   const navigate = useNavigate();
   const [preview, setPreview] = useState("");
   const [loader, setLoader] = useState(false);
@@ -67,6 +68,12 @@ const CategoryItem = () => {
           if (response) {
             setLoader(false);
             setFoodItems({ data: response });
+            setEmptyCategoryMessage(undefined);
+            if (response.length <= 0) {
+              setEmptyCategoryMessage(
+                "This Category does not contain any food item"
+              );
+            }
           } else {
             setFoodItems("");
             setLoader(false);
@@ -134,13 +141,12 @@ const CategoryItem = () => {
       }
     }
   };
-  console.log(category);
 
   return (
     <>
       {categories ? (
         <div className="lg:flex">
-          <div className="w-8/12">
+          <div className=" w-full lg:w-8/12">
             <div className="AddFoodItemTitle  text-center text-2xl font-semibold pb-2">
               Create a Food Item
             </div>
@@ -320,11 +326,19 @@ const CategoryItem = () => {
               </div>
             ) : (
               <>
-                {foodItems
-                  ? foodItems.data.map((item, index) => (
-                      <Item info={item} key={index} />
-                    ))
-                  : null}
+                {emptyCategoryMessage ? (
+                  <div className="text-center mt-8 text-black">
+                    {emptyCategoryMessage}
+                  </div>
+                ) : (
+                  <div className="categoryContainer flex flex-wrap lg:block lg:w-full  lg:overflow-y-auto lg:px-0 px-10  mb-4 mt-2 ">
+                    {foodItems
+                      ? foodItems.data.map((item, index) => (
+                          <Item info={item} key={index} />
+                        ))
+                      : null}
+                  </div>
+                )}
               </>
             )}
           </div>

@@ -127,7 +127,9 @@ const EditFoodItems = () => {
           ) : (
             <>
               {emptyCategoryMessage ? (
-                <div className="text-center mt-8">{emptyCategoryMessage}</div>
+                <div className="text-center mt-8 text-black">
+                  {emptyCategoryMessage}
+                </div>
               ) : (
                 <div className="categoryContainer flex flex-wrap lg:block lg:w-9/12   lg:overflow-y-auto lg:px-0 px-10  mb-4 mt-2 ">
                   {foodItems

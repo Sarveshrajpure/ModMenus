@@ -27,7 +27,7 @@ const Item = ({
     }
   };
   return (
-    <div className="itemWrapper w-10/12 lg:w-full my-2 mx-2 lg:mx-0 rounded p-2">
+    <div className="itemWrapper w-full my-2 mx-2 lg:mx-0 rounded p-2">
       <div className="itemDetailsBlock  py-2  ">
         <div className="nameDetail text-xl text-center">{info.name}</div>
 

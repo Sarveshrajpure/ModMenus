@@ -28,11 +28,10 @@ const LoginForm = () => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-
     try {
       if (data) {
-        let response = await LoginUser(data);
         setLoader(true);
+        let response = await LoginUser(data);
         if (response) {
           dispatch(login_user(response));
           setLoader(false);

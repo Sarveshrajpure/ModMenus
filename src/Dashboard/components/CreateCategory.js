@@ -36,6 +36,7 @@ const CreateMenu = () => {
   useEffect(() => {
     (async function () {
       try {
+        setLoader(true);
         let sendData = {
           menuId: menu ? menu._id : null,
         };
@@ -44,15 +45,17 @@ const CreateMenu = () => {
         if (response) {
           console.log(response);
           setCategories({ data: response });
+          setLoader(false);
           navigate("/dashboard/createcategory");
         } else {
           setCategories("");
         }
       } catch (err) {
+        setLoader(false);
         console.log(err);
       }
     })();
-  }, [categoryCreatedResponse]);
+  }, [categoryCreatedResponse, menu, navigate]);
 
   const {
     register,
@@ -145,7 +148,7 @@ const CreateMenu = () => {
              focus:shadow-outline"
               id="time"
               type="text"
-              placeholder="Enter time slot for which this CATGEORY will be served"
+              placeholder="Enter time slot for which this CATEGORY will be served"
               {...register("time")}
             />
             {
@@ -181,9 +184,21 @@ const CreateMenu = () => {
           )}
         </form>
         <div className="categoryContainer flex flex-wrap lg:block lg:w-4/12  lg:overflow-y-auto lg:px-2 px-10  mb-4 ">
-          {categories
-            ? categories.data.map((item) => <Category info={item} />)
-            : null}
+          {loader ? (
+            <div className="spinner h-screen relative flex justify-center">
+              <img
+                className="transform absolute top-2/4    w-20 "
+                src={spinner}
+                alt="Loading"
+              />
+            </div>
+          ) : (
+            <div className="w-full">
+              {categories
+                ? categories.data.map((item) => <Category info={item} />)
+                : null}
+            </div>
+          )}
         </div>
       </div>
       <ToastContainer />

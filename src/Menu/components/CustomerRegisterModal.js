@@ -33,8 +33,8 @@ const CustomerRegisterModal = ({ businessInfo, closeModal }) => {
       if (data) {
         let registerationData = {
           name: data.name,
-          guestEmail: data.email,
-          guestPhone: data.phone,
+          email: data.email,
+          phone: data.phone,
           businessId: businessInfo.menuData.businessId,
         };
         let response = await guestRegister(registerationData);
