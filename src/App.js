@@ -8,6 +8,7 @@ import MenuRoute from "./Menu";
 import Menu from "./Menu/Menu";
 import Cart from "./Menu/components/Cart";
 import OrderSummary from "./Menu/components/OrderSummary";
+import DashboardHome from "./Dashboard/components/dashboardHome";
 import CreateCategory from "./Dashboard/components/CreateCategory";
 import CategoryItem from "./Dashboard/components/CategoryItem";
 import EditCategory from "./Dashboard/components/EditCategory";
@@ -34,6 +35,7 @@ function App() {
       </Route>
       <Route path="/" element={<PrivateRoute />}>
         <Route path="dashboard" element={<Dashboard />}>
+          <Route path="dashboardhome" element={<DashboardHome />} />
           <Route path="createcategory" element={<CreateCategory />} />
           <Route path="createcategoryitem" element={<CategoryItem />} />
           <Route path="editcategory" element={<EditCategory />} />
