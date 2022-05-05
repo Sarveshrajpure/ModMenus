@@ -17,6 +17,16 @@ const Dashboard = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    var pathArray = [];
+    pathArray = window.location.pathname.split("/");
+    let pathArrayLength = pathArray.length;
+    let currentSelection = pathArray[pathArrayLength - 1];
+    console.log(currentSelection);
+    setNavSelection(currentSelection);
+  }, []);
+
   useEffect(() => {
     const socket = io("localhost:3001/api/socket");
     socket.on("newOrder", async (newOrder) => {
@@ -76,14 +86,16 @@ const Dashboard = () => {
               <div
                 className="py-2 px-10 lg:py-2  border-dashed border-b-2 cursor-pointer  "
                 onClick={() => {
-                  setNavSelection("Dashboard");
+                  setNavSelection("dashboardhome");
                   setOpen("hidden");
                   setMenu("close");
                 }}
               >
                 <div
                   className={`rounded p-2 pl-2 pr-2 w-max transition-all select-none ${
-                    navSelection === "Dashboard" ? "bg-sky-900 text-white" : ""
+                    navSelection === "dashboardhome"
+                      ? "bg-sky-900 text-white"
+                      : ""
                   } `}
                 >
                   Dashboard
@@ -95,14 +107,14 @@ const Dashboard = () => {
               <div
                 className="py-2 px-10 lg:py-2 border-dashed border-b-2 cursor-pointer"
                 onClick={() => {
-                  setNavSelection("AddMenuCategories");
+                  setNavSelection("createcategory");
                   setOpen("hidden");
                   setMenu("close");
                 }}
               >
                 <div
                   className={`rounded p-2 pl-2 pr-2 w-max transition-all select-none ${
-                    navSelection === "AddMenuCategories"
+                    navSelection === "createcategory"
                       ? "bg-sky-900 text-white"
                       : ""
                   } `}
@@ -115,14 +127,14 @@ const Dashboard = () => {
               <div
                 className="py-2 px-10 lg:py-2 border-dashed  border-b-2 cursor-pointer"
                 onClick={() => {
-                  setNavSelection("AddMenuFoodItems");
+                  setNavSelection("createcategoryitem");
                   setOpen("hidden");
                   setMenu("close");
                 }}
               >
                 <div
                   className={`rounded p-2 pl-2 pr-2 w-max transition-all select-none ${
-                    navSelection === "AddMenuFoodItems"
+                    navSelection === "createcategoryitem"
                       ? "bg-sky-900 text-white"
                       : ""
                   } `}
@@ -135,14 +147,14 @@ const Dashboard = () => {
               <div
                 className="py-2 px-10 lg:py-2 border-dashed border-b-2 cursor-pointer"
                 onClick={() => {
-                  setNavSelection("EditCategories");
+                  setNavSelection("editcategory");
                   setOpen("hidden");
                   setMenu("close");
                 }}
               >
                 <div
                   className={`rounded p-2 pl-2 pr-2 w-max transition-all select-none ${
-                    navSelection === "EditCategories"
+                    navSelection === "editcategory"
                       ? "bg-sky-900 text-white"
                       : ""
                   } `}
@@ -155,14 +167,14 @@ const Dashboard = () => {
               <div
                 className="py-2 px-10 lg:py-2 border-dashed border-b-2 cursor-pointer"
                 onClick={() => {
-                  setNavSelection("EditFoodItems");
+                  setNavSelection("editfooditem");
                   setOpen("hidden");
                   setMenu("close");
                 }}
               >
                 <div
                   className={`rounded p-2 pl-2 pr-2 w-max transition-all select-none ${
-                    navSelection === "EditFoodItems"
+                    navSelection === "editfooditem"
                       ? "bg-sky-900 text-white"
                       : ""
                   } `}
