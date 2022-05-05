@@ -1,0 +1,40 @@
+.goToCartBtn{
+   justify-content: space-between;
+   height: max-content;
+   cursor: pointer;
+}
+
+.cartQuantityBlock{
+    color:#004466;
+    position:relative;
+    font-weight: 600;
+    top:-5px;
+    background-color: #a9d6f191;
+    border-radius: 50%;
+    padding: 0.1rem 0rem 0rem 0rem;
+    width:22px;
+    cursor: pointer;
+}
+
+
+.quantityActionBtn{
+    background-color: #a9d6f191;
+    color:#004466;
+    font-weight: 600;
+    border-radius: 50%;
+    height: min-content;
+    cursor: pointer;
+}
+
+
+.orderBtn {
+    background-color: #a9d6f191;
+    color:#004466;
+    font-weight: 600;
+    width: 90%;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 200ms ease-in;
+    margin: auto;
+    cursor: pointer;
+  }

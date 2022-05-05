@@ -4,10 +4,13 @@ import { guestRegisterSchema } from "../../validations/GuestRegisterValidations"
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { guestRegister } from "../MenuActrions";
+import { useDispatch } from "react-redux";
+import { signin_guest } from "../../Actions/guestActions";
 import spinner from "../../assests/spinner.gif";
 
 const CustomerRegisterModal = ({ businessInfo, closeModal }) => {
   console.log(businessInfo);
+  const dispatch = useDispatch();
   const [registerError, setRegisterError] = useState();
   const [loader, setLoader] = useState(false);
   const {
@@ -18,6 +21,9 @@ const CustomerRegisterModal = ({ businessInfo, closeModal }) => {
     mode: "onChange",
     resolver: yupResolver(guestRegisterSchema),
   });
+  const setModalCookie = () => {
+    document.cookie = "ModMenus_Register_modal_shown=true";
+  };
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
@@ -32,8 +38,16 @@ const CustomerRegisterModal = ({ businessInfo, closeModal }) => {
           businessId: businessInfo.menuData.businessId,
         };
         let response = await guestRegister(registerationData);
-        setLoader(false);
-        closeModal();
+        if (response) {
+          console.log(response.guest);
+          console.log(data.table);
+
+          const guest = { ...response.guest, table: data.table };
+          dispatch(signin_guest(guest));
+          setModalCookie();
+          setLoader(false);
+          closeModal();
+        }
       }
     } catch (err) {
       setLoader(false);
@@ -44,14 +58,14 @@ const CustomerRegisterModal = ({ businessInfo, closeModal }) => {
   return (
     <div className="customerRegisterModalWrapper flex justify-center">
       <div className="customerRegisterModalContent rounded w-full lg:w-3/12 h-max ml-4 mr-4 lg:m-0 ">
-        <div className="customerRegisterModalCloseBtn text-right">
+        {/* <div className="customerRegisterModalCloseBtn text-right">
           <i
             className="fa-solid fa-xmark mr-3 mt-3 cursor-pointer"
             onClick={() => {
               closeModal();
             }}
           ></i>
-        </div>
+        </div> */}
         <div className="customerRegisterModalTitle text-center mt-6 text-lg font-semibold">
           Guest Register
         </div>
@@ -106,6 +120,24 @@ const CustomerRegisterModal = ({ businessInfo, closeModal }) => {
               >
                 {errors.email?.message}
               </div>
+
+              <input
+                className=" appearance-none border 
+            rounded w-full py-2 px-3 text-gray-700 
+            leading-tight focus:outline-none
+             focus:shadow-outline mt-5"
+                id="table"
+                type="text"
+                placeholder="Table number "
+                {...register("table")}
+              />
+              <div
+                className="invalid-feedback  text-red-500 text-xs px-2 pt-1"
+                style={errors.table ? { display: "block" } : {}}
+              >
+                {errors.table?.message}
+              </div>
+
               {loader ? (
                 <div className="flex justify-center mt-1">
                   <img className="w-12" src={spinner} alt="spinner" />

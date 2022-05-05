@@ -4,7 +4,11 @@ import Home from "./Home";
 import Register from "./Register";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
-import Menu from "./Menu";
+import MenuRoute from "./Menu";
+import Menu from "./Menu/Menu";
+import Cart from "./Menu/components/Cart";
+import OrderSummary from "./Menu/components/OrderSummary";
+import DashboardHome from "./Dashboard/components/dashboardHome";
 import CreateCategory from "./Dashboard/components/CreateCategory";
 import CategoryItem from "./Dashboard/components/CategoryItem";
 import EditCategory from "./Dashboard/components/EditCategory";
@@ -17,7 +21,11 @@ import ViewCustomerData from "./Dashboard/components/ViewCustomerData";
 function App() {
   return (
     <Routes>
-      <Route exact path="/menu/:menuReference" element={<Menu />} />
+      <Route exact path="/menus/" element={<MenuRoute />}>
+        <Route path="menu/:menuReference" element={<Menu />} />
+      </Route>
+      <Route path="/menus/cart" element={<Cart />} />
+      <Route path="/menus/orders" element={<OrderSummary />} />
       <Route path="/" element={<PublicRoute />}>
         <Route exact path="/" element={<Home />} />
       </Route>
@@ -27,6 +35,7 @@ function App() {
       </Route>
       <Route path="/" element={<PrivateRoute />}>
         <Route path="dashboard" element={<Dashboard />}>
+          <Route path="dashboardhome" element={<DashboardHome />} />
           <Route path="createcategory" element={<CreateCategory />} />
           <Route path="createcategoryitem" element={<CategoryItem />} />
           <Route path="editcategory" element={<EditCategory />} />

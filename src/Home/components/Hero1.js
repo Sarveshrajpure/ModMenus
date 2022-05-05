@@ -15,7 +15,7 @@ const Hero1 = () => {
 
   const navigateTo = async () => {
     if (user) {
-      navigate("/dashboard");
+      navigate("/dashboard/dashboardhome");
     } else {
       navigate("/register");
     }

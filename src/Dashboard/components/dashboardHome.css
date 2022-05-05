@@ -1,0 +1,25 @@
+.ordersWrapper{
+    max-height: 60vh;
+}
+.activeOrdersTitle{
+    color:#0C4A6E;
+}
+.statisticsTitle{
+    color:#0C4A6E;
+
+}
+.statisticsItemTitle{
+    color:#0C4A6E;
+}
+.qrImageTag{
+    width:10rem;
+}
+.qrImageDownloadBtn{
+    width:65%;
+    background-color: #98c1d9;
+    text-align: center;
+    border-radius: 0.5rem;
+    padding: 0.3rem 1rem 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 200ms ease-in;
+}

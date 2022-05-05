@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { getMenu } from "./menuActions";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import Nav from "../Home/components/Nav";
@@ -7,6 +6,7 @@ import { userSignOut } from "../Login/loginAction";
 import { useDispatch } from "react-redux";
 import { signout_user } from "../Actions/userActions";
 import "./dashboard.css";
+import io from "socket.io-client";
 
 const Dashboard = () => {
   const [qr, setQr] = useState("");
@@ -17,33 +17,22 @@ const Dashboard = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const menu = useSelector((state) =>
-  //   state.User.loginInfo.user.firstname ? state.User.loginInfo.menuInfo : null
-  // );
 
   useEffect(() => {
-    async function getQr() {
-      try {
-        if (menu.menuReference) {
-          setLoader(true);
-          let response = await getMenu(menu.menuReference);
-          console.log(response.data[0].menuData.qrLink);
-          setQr(response.data[0].menuData.qrLink);
-          setLoader(false);
-        }
-      } catch (error) {
-        setLoader(false);
-        console.log(error);
-      }
-    }
-    getQr();
-  }, [menu.menuReference]);
+    var pathArray = [];
+    pathArray = window.location.pathname.split("/");
+    let pathArrayLength = pathArray.length;
+    let currentSelection = pathArray[pathArrayLength - 1];
+    console.log(currentSelection);
+    setNavSelection(currentSelection);
+  }, []);
 
-  const user = useSelector((state) =>
-    state.User.user_verification.user.firstname
-      ? state.User.user_verification.user
-      : null
-  );
+  useEffect(() => {
+    const socket = io("localhost:3001/api/socket");
+    socket.on("newOrder", async (newOrder) => {
+      console.log(newOrder);
+    });
+  }, []);
 
   function capitalizeFirstLetter(string) {
     if (string) {
@@ -71,6 +60,7 @@ const Dashboard = () => {
       console.log(err);
     }
   };
+
   return (
     <div className="dashboardLayoutWrapper">
       <Nav isHomePage={false} />
@@ -92,18 +82,20 @@ const Dashboard = () => {
           <div
             className={`dashboardLayoutLeftNavLinks ${menu} ${open}  lg:block absolute w-full z-10 lg:static   `}
           >
-            <Link to="/dashboard">
+            <Link to="dashboardhome">
               <div
                 className="py-2 px-10 lg:py-2  border-dashed border-b-2 cursor-pointer  "
                 onClick={() => {
-                  setNavSelection("Dashboard");
+                  setNavSelection("dashboardhome");
                   setOpen("hidden");
                   setMenu("close");
                 }}
               >
                 <div
                   className={`rounded p-2 pl-2 pr-2 w-max transition-all select-none ${
-                    navSelection === "Dashboard" ? "bg-sky-900 text-white" : ""
+                    navSelection === "dashboardhome"
+                      ? "bg-sky-900 text-white"
+                      : ""
                   } `}
                 >
                   Dashboard
@@ -115,14 +107,14 @@ const Dashboard = () => {
               <div
                 className="py-2 px-10 lg:py-2 border-dashed border-b-2 cursor-pointer"
                 onClick={() => {
-                  setNavSelection("AddMenuCategories");
+                  setNavSelection("createcategory");
                   setOpen("hidden");
                   setMenu("close");
                 }}
               >
                 <div
                   className={`rounded p-2 pl-2 pr-2 w-max transition-all select-none ${
-                    navSelection === "AddMenuCategories"
+                    navSelection === "createcategory"
                       ? "bg-sky-900 text-white"
                       : ""
                   } `}
@@ -135,14 +127,14 @@ const Dashboard = () => {
               <div
                 className="py-2 px-10 lg:py-2 border-dashed  border-b-2 cursor-pointer"
                 onClick={() => {
-                  setNavSelection("AddMenuFoodItems");
+                  setNavSelection("createcategoryitem");
                   setOpen("hidden");
                   setMenu("close");
                 }}
               >
                 <div
                   className={`rounded p-2 pl-2 pr-2 w-max transition-all select-none ${
-                    navSelection === "AddMenuFoodItems"
+                    navSelection === "createcategoryitem"
                       ? "bg-sky-900 text-white"
                       : ""
                   } `}
@@ -155,14 +147,14 @@ const Dashboard = () => {
               <div
                 className="py-2 px-10 lg:py-2 border-dashed border-b-2 cursor-pointer"
                 onClick={() => {
-                  setNavSelection("EditCategories");
+                  setNavSelection("editcategory");
                   setOpen("hidden");
                   setMenu("close");
                 }}
               >
                 <div
                   className={`rounded p-2 pl-2 pr-2 w-max transition-all select-none ${
-                    navSelection === "EditCategories"
+                    navSelection === "editcategory"
                       ? "bg-sky-900 text-white"
                       : ""
                   } `}
@@ -175,14 +167,14 @@ const Dashboard = () => {
               <div
                 className="py-2 px-10 lg:py-2 border-dashed border-b-2 cursor-pointer"
                 onClick={() => {
-                  setNavSelection("EditFoodItems");
+                  setNavSelection("editfooditem");
                   setOpen("hidden");
                   setMenu("close");
                 }}
               >
                 <div
                   className={`rounded p-2 pl-2 pr-2 w-max transition-all select-none ${
-                    navSelection === "EditFoodItems"
+                    navSelection === "editfooditem"
                       ? "bg-sky-900 text-white"
                       : ""
                   } `}
@@ -192,7 +184,7 @@ const Dashboard = () => {
               </div>
             </Link>
 
-            <div
+            {/* <div
               className="y-2 px-10 lg:py-2 border-dashed border-b-2 cursor-pointer"
               onClick={() => {
                 setNavSelection("ViewCustomerData");
@@ -211,7 +203,7 @@ const Dashboard = () => {
                   View customer data
                 </div>
               </Link>
-            </div>
+            </div> */}
 
             <div
               className="py-2 px-12 lg:py-4 border-dashed border-b-2 cursor-pointer"

@@ -96,3 +96,31 @@ export const getMenu = async (value) => {
   let menuData = await axiosInstance.get(`/menucard/getmenu/${value}`);
   return menuData;
 };
+
+//-----------------------------Orders actions--------------------------------------------------------
+
+export const fetchOrdersByBusinessId = async (values) => {
+  const orders = await axiosInstance.get(
+    `/orders/findorderbybusinessid/${values.businessId}`
+  );
+  return orders;
+};
+
+export const updateOrderStatus = async (values) => {
+  const updateOrder = await axiosInstance.post(
+    "/orders/updateorderstatus",
+    values,
+    getAuthHeader()
+  );
+  return updateOrder;
+};
+
+//------------------------Statistics actions-------------------------------------------------------------
+
+export const fetchStatistics = async (values) => {
+  const statistics = await axiosInstance.get(
+    `/stats/getStats/${values.businessId}`,
+    getAuthHeader()
+  );
+  return statistics;
+};
