@@ -23,23 +23,6 @@ const Dashboard = () => {
       console.log(newOrder);
     });
   }, []);
-  useEffect(() => {
-    async function getQr() {
-      try {
-        if (menu.menuReference) {
-          setLoader(true);
-          let response = await getMenu(menu.menuReference);
-          console.log(response.data[0].menuData.qrLink);
-          setQr(response.data[0].menuData.qrLink);
-          setLoader(false);
-        }
-      } catch (error) {
-        setLoader(false);
-        console.log(error);
-      }
-    }
-    getQr();
-  }, [menu.menuReference]);
 
   function capitalizeFirstLetter(string) {
     if (string) {

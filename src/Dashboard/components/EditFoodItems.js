@@ -13,6 +13,7 @@ const EditFoodItems = () => {
   );
   const [category, setCategory] = useState();
   const [categoryError, setCategoryError] = useState();
+  const [updateFoodItem, setUpdateFoodItems] = useState(false);
   const [categories, setCategories] = useState([]);
   const [foodItems, setFoodItems] = useState();
   const [editItem, setEditItem] = useState(false);
@@ -35,7 +36,6 @@ const EditFoodItems = () => {
   useEffect(() => {
     (async function () {
       try {
-        console.log("in effect of caztegory");
         let sendData = {
           menuId: menu ? menu._id : null,
         };
@@ -79,7 +79,7 @@ const EditFoodItems = () => {
         setError(error.message);
       }
     })();
-  }, [category]);
+  }, [category, updateFoodItem]);
   return (
     <div className="editFoodItemWrapper">
       <div className="editFoodItemTitle text-center text-xl font-semibold">
@@ -142,9 +142,8 @@ const EditFoodItems = () => {
                             setEditItem(true);
                           }}
                           setFoodItemDisplayFalse={() => {
-                            setCategory("");
                             setFoodItems("");
-                            setCategories(undefined);
+                            setUpdateFoodItems((prev) => !prev);
                           }}
                           editItemInfo={(val) => {
                             setEditItemInfo(val);
