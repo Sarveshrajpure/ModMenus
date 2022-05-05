@@ -107,24 +107,47 @@ const Cart = () => {
             <div className="text-lg text-center">{guest.name}'s Cart</div>
           </div>
           {calcTQuantity() > 0 ? (
-            <div className="text-xl font-extrabold flex justify-between px-1">
-              <div
-                onClick={() => {
-                  navigate(-1);
-                }}
-              >
-                <i class="fa-solid fa-left-long"></i>
+            <>
+              <div className="text-xl font-extrabold flex justify-between px-1 cursor-pointer">
+                <div
+                  onClick={() => {
+                    navigate(-1);
+                  }}
+                >
+                  <i class="fa-solid fa-left-long"></i>
+                </div>
+
+                <div className="text-sm py-1">
+                  {calcTQuantity()} {calcTQuantity() > 1 ? "Items" : "Item"}
+                </div>
               </div>
 
-              <div className="text-sm py-1">
-                {calcTQuantity()} {calcTQuantity() > 1 ? "Items" : "Item"}
-              </div>
-            </div>
+              <hr className="categoryHr" />
+            </>
           ) : (
-            <div className="text-lg text-center py-2"> Your Order </div>
+            <>
+              {orderPlaced.items ? (
+                <>
+                  <div className="text-lg text-center py-2"> Your Order </div>
+                  <hr className="categoryHr" />
+                </>
+              ) : (
+                <div className="text-xl  px-2 py-2 font-bold">
+                  <div
+                    onClick={() => {
+                      navigate(-1);
+                    }}
+                  >
+                    <i class="fa-solid fa-left-long"></i>
+                  </div>
+                  <div className="py-48 text-center text-lg">
+                    {" "}
+                    Your Cart is Empty, add items to place order{" "}
+                  </div>
+                </div>
+              )}
+            </>
           )}
-
-          <hr className="categoryHr" />
 
           {data.map((element, index) => {
             return <CartItem key={index} item={element} />;
@@ -183,7 +206,7 @@ const Cart = () => {
             ""
           )}
         </div>
-      )}{" "}
+      )}
       <MenuFooter />
     </div>
   );
