@@ -16,6 +16,7 @@ const Orders = ({ orderInfo, setClearOrder }) => {
   };
   return (
     <div className="orderCardWrapper p-4 bg-white w-9/12 rounded mt-2">
+      
       <div className="orderCardContent ">
         <div className="orderCardTableDisplay text-center font-semibold text-xl">
           Table Number: {orderInfo.tableNumber}

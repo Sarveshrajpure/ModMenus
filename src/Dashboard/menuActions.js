@@ -97,7 +97,7 @@ export const getMenu = async (value) => {
   return menuData;
 };
 
-//-----------------------------orders actions--------------------------------------------------------
+//-----------------------------Orders actions--------------------------------------------------------
 
 export const fetchOrdersByBusinessId = async (values) => {
   const orders = await axiosInstance.get(
@@ -113,4 +113,14 @@ export const updateOrderStatus = async (values) => {
     getAuthHeader()
   );
   return updateOrder;
+};
+
+//------------------------Statistics actions-------------------------------------------------------------
+
+export const fetchStatistics = async (values) => {
+  const statistics = await axiosInstance.get(
+    `/stats/getStats/${values.businessId}`,
+    getAuthHeader()
+  );
+  return statistics;
 };
