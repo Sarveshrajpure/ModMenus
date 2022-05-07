@@ -37,7 +37,7 @@ const DashboardHome = () => {
   }, []);
 
   useEffect(() => {
-    const socket = io("https://offdutyninjas.site/api/socket");
+    const socket = io("https://localhost:3001/api/socket");
     socket.on("newOrder", async (newOrder) => {
       if (newOrder.businessId === businessId) {
         let dataToBeSent = {
