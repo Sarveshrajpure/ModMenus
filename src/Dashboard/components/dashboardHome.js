@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { fetchOrdersByBusinessId, fetchStatistics } from "../menuActions";
 import io from "socket.io-client";
 import Orders from "./orders";
 import "./dashboardHome.css";
 import CountUp from "react-countup";
+import { initSocket } from "../../Utilities/socketIoConfig";
 
 const DashboardHome = () => {
+  const socketRef = useRef(null);
   const businessId = useSelector((state) =>
     state.User.user_verification.user.firstname
       ? state.User.user_verification.user._id
@@ -37,16 +39,22 @@ const DashboardHome = () => {
   }, []);
 
   useEffect(() => {
-    const socket = io("https://localhost:3001/api/socket");
-    socket.on("newOrder", async (newOrder) => {
-      if (newOrder.businessId === businessId) {
-        let dataToBeSent = {
-          businessId: businessId,
-        };
-        let response = await fetchOrdersByBusinessId(dataToBeSent);
-        setOrders(response.data);
-      }
-    });
+    const init = async () => {
+      socketRef.current = await initSocket();
+      socketRef.current = await initSocket().on(
+        "newOrder",
+        async (newOrder) => {
+          if (newOrder.businessId === businessId) {
+            let dataToBeSent = {
+              businessId: businessId,
+            };
+            let response = await fetchOrdersByBusinessId(dataToBeSent);
+            setOrders(response.data);
+          }
+        }
+      );
+    };
+    init();
   }, []);
   useEffect(() => {
     async function getStatistics() {

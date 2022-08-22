@@ -213,8 +213,8 @@ const EditCategory = () => {
                 {selectedCategoriesId === undefined ? (
                   ""
                 ) : (
-                  <form className="flex justify-center" onSubmit={onSubmit}>
-                    <div className="editCategoryFormInputWrapper w-1/2 pt-6">
+                  <form className="flex justify-center " onSubmit={onSubmit}>
+                    <div className="editCategoryFormInputWrapper md:w-1/2 pt-6">
                       <div>
                         <label
                           className="block text-gray-700 text-sm font-bold mb-2"
@@ -273,12 +273,12 @@ const EditCategory = () => {
                           <img className="w-16" src={spinner} alt="spinner" />
                         </div>
                       ) : (
-                        <div className="flex justify-around pt-6 ">
+                        <div className="flex justify-between pt-6  ">
                           <button
                             value="edit"
                             className="editCategoryBtn shadow-md mt-2 text-lg md:text-xl md:mt-4 lg:text-xl"
                           >
-                            Submit
+                            submit
                           </button>
                           <button
                             value="delete"
