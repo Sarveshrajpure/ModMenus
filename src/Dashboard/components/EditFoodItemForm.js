@@ -40,6 +40,7 @@ const EditFoodItemForm = ({ itemInfo, editItem, popUpMessage }) => {
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
+    setFileInput(e.target.value);
     previewFile(file);
   };
 
@@ -104,14 +105,14 @@ const EditFoodItemForm = ({ itemInfo, editItem, popUpMessage }) => {
       >
         <i className="fa-solid fa-arrow-left"></i>
       </div>
-      <div className="editFoodItemForm mt-5">
+      <div className="editFoodItemForm mt-5 ">
         <form
           className="flex justify-center"
           onSubmit={(e) => {
             SubmitForm(e);
           }}
         >
-          <div className="editFoodItemInputWrapper w-1/2 pt-6">
+          <div className="editFoodItemInputWrapper md:w-1/2 w-5/6 pt-6">
             <div>
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -193,14 +194,14 @@ const EditFoodItemForm = ({ itemInfo, editItem, popUpMessage }) => {
                 {errors.price?.message}
               </div>
             </div>
-            <div className="mt-2">
+            <div className="mt-2 ">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="Image"
               >
                 Image
               </label>
-              <div className="foodItemImgContainter flex">
+              <div className="foodItemImgContainter  md:flex  ">
                 <>
                   {preview ? (
                     <img
@@ -233,7 +234,6 @@ const EditFoodItemForm = ({ itemInfo, editItem, popUpMessage }) => {
                   <div className="flex justify-center mb-4">
                     <input
                       type="file"
-                      name="image"
                       onChange={handleFileInputChange}
                       value={fileInput}
                       className="form-input"
@@ -243,7 +243,7 @@ const EditFoodItemForm = ({ itemInfo, editItem, popUpMessage }) => {
                     {preview ? (
                       <div
                         value="delete"
-                        className="clearFoodItemImgBtn shadow-md mt-2  text-lg md:text-base md:mt-4 lg:text-base"
+                        className="clearFoodItemImgBtn shadow-md mt-2  text-md md:text-base md:mt-4 lg:text-base"
                         onClick={() => {
                           setPreview("");
                         }}

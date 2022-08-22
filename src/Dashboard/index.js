@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getMenu } from "./menuActions";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import Nav from "../Home/components/Nav";
@@ -6,11 +6,12 @@ import { userSignOut } from "../Login/loginAction";
 import { useDispatch } from "react-redux";
 import { signout_user } from "../Actions/userActions";
 import "./dashboard.css";
-import io from "socket.io-client";
+import { initSocket } from "../Utilities/socketIoConfig";
 
 const Dashboard = () => {
   const [qr, setQr] = useState("");
   const [loader, setLoader] = useState(false);
+  const socketRef = useRef(null);
   const [navSelection, setNavSelection] = useState("Dashboard");
   const [open, setOpen] = useState("hidden");
   const [menu, setMenu] = useState("close");
@@ -28,10 +29,13 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    const socket = io("localhost:3001/api/socket");
-    socket.on("newOrder", async (newOrder) => {
-      console.log(newOrder);
-    });
+    const init = async () => {
+      socketRef.current = await initSocket();
+      socketRef.current.on("newOrder", async (newOrder) => {
+        console.log(newOrder);
+      });
+    };
+    init();
   }, []);
 
   function capitalizeFirstLetter(string) {

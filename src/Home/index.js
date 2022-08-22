@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Nav from "./components/Nav";
 import Hero1 from "./components/Hero1";
 import Hero2 from "./components/Hero2";
